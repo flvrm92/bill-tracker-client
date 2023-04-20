@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ICategory } from 'src/app/core/models/ICategory';
 import { MatTableDataSource } from '@angular/material/table';
-import { CategoryService } from '../../services/category-service';
+import { CategoryService } from '../../services/category.service';
 import { Router } from '@angular/router';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
 

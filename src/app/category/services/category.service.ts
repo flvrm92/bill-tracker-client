@@ -21,7 +21,6 @@ export class CategoryService {
       )
   };
 
-
   post(category: ICategory): Observable<ICategory> {
     return this.http.post<ICategory>(`${this.apiUrl}/category`, category)
       .pipe(

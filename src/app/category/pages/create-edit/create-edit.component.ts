@@ -1,7 +1,7 @@
 import { Component, SecurityContext } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ICategory, generateDefaultCategory } from 'src/app/core/models/ICategory';
-import { CategoryService } from '../../services/category-service';
+import { CategoryService } from '../../services/category.service';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
