@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CategoryService } from '../../services/category.service';
 import { Subject, takeUntil } from 'rxjs';
-import { ICategory } from 'src/app/core/models/ICategory';
+import { IBill } from 'src/app/core/models/IBill';
+import { BillService } from '../../services/bill.service';
 
 @Component({
   selector: 'app-landing',
@@ -10,17 +10,15 @@ import { ICategory } from 'src/app/core/models/ICategory';
 })
 export class LandingComponent {
 
-  categories: ICategory[] = [];
+  bills: IBill[] = [];
   private destroy$ = new Subject();
 
-  constructor(private categoryService: CategoryService) {
-
-  }
+  constructor(private billService: BillService) { }
 
   ngOnInit(): void {
-    this.categoryService.getAll()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(categories => this.categories = categories);
+    this.billService.getAll()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(bills => this.bills = bills);
   }
 
   ngOnDestroy(): void {

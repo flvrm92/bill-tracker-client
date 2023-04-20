@@ -5,12 +5,14 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="form">
-      <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-        <input matInput type="text" formControlName="name" placeholder="Category name">
-      </mat-form-field>
-    </form>
+    <div class="container">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name" placeholder="Category name">
+        </mat-form-field>
+      </form>
+    </div>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">
