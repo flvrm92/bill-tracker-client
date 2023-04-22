@@ -1,26 +1,46 @@
-import { Component, SecurityContext } from '@angular/core';
+import { Component, SecurityContext, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ICategory, generateDefaultCategory } from 'src/app/core/models/ICategory';
 import { CategoryService } from '../../services/category.service';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-edit',
   templateUrl: './create-edit.component.html',
   styleUrls: ['./create-edit.component.scss']
 })
-export class CreateEditComponent {
+export class CreateEditComponent implements OnInit, OnDestroy {
   category: ICategory | undefined;
 
   form: FormGroup<CategoryForm>;
 
-  constructor(fb: FormBuilder,
+  private destroy$ = new Subject();
+
+  constructor(
+    private fb: FormBuilder,
     private domSanitizer: DomSanitizer,
     private categoryService: CategoryService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.form = CreateEditComponent.buildForm(fb, generateDefaultCategory());
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(null);
+    this.destroy$.complete();
+  }
+
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id') as string;
+    if (id) {
+      this.categoryService.getById(id)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(category => this.form = CreateEditComponent.buildForm(this.fb, category));
+    }
   }
 
   save() {
@@ -32,9 +52,7 @@ export class CreateEditComponent {
       name: categoryName,
     }
 
-    const request: Observable<ICategory> = requestBody.id
-      ? this.categoryService.post(requestBody)
-      : this.categoryService.put(requestBody);
+    const request = requestBody.id ? this.categoryService.put(requestBody) : this.categoryService.post(requestBody);
 
     request.subscribe(result => {
       this.alertService.toastAlert({
@@ -42,12 +60,10 @@ export class CreateEditComponent {
         text: `Category ${result.name} was ${requestBody.id ? 'updated' : 'created'} successfully.`,
         icon: AlertIcon.Success,
       });
-      if (result) {
-        this.category = result;
-      }
+
+      this.router.navigate(['category']);
     });
   }
-
 
   static buildForm(fb: FormBuilder, category: ICategory): FormGroup<CategoryForm> {
     return fb.nonNullable.group({
