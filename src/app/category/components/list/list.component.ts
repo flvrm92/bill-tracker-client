@@ -33,20 +33,28 @@ export class ListComponent implements OnInit {
   }
 
   edit(category: ICategory) {
-    this.router.navigate(['category', 'create-edit', category.id]);
+    this.router.navigate(['category', category.id]);
   }
 
-  delete(category: ICategory) {
-    this.categoryService.delete(category.id)
-      .subscribe(() => {
-        this.alertService.toastAlert({
-          title: 'Category deleted',
-          text: `Category ${category.name} was deleted successfully.`,
-          icon: AlertIcon.Success,
+  async delete(category: ICategory) {
+    const confirmRemove = await this.alertService.yesOrNoAlert({
+      title: 'Delete category',
+      text: `Are you sure you want to delete category ${category.name}?`,
+      icon: AlertIcon.Warning,
+    });
+
+    if (confirmRemove) {
+      this.categoryService.delete(category.id)
+        .subscribe(() => {
+          this.alertService.toastAlert({
+            title: 'Category deleted',
+            text: `Category ${category.name} was deleted successfully.`,
+            icon: AlertIcon.Success,
+          });
+          this.categories = this.categories.filter(c => c.id !== category.id);
+          this.updateDataSource();
         });
-        this.categories = this.categories.filter(c => c.id !== category.id);
-        this.updateDataSource();
-      });
+    }
   }
 
   private updateDataSource(): void {

@@ -21,6 +21,14 @@ export class CategoryService {
       )
   };
 
+  getById(id: string): Observable<ICategory> {
+    return this.http.get<ICategory>(`${this.apiUrl}/category/${id}`)
+      .pipe(
+        retry(2),
+        catchError(logAndHandleHttpError('category', {} as ICategory))
+      )
+  };
+
   post(category: ICategory): Observable<ICategory> {
     return this.http.post<ICategory>(`${this.apiUrl}/category`, category)
       .pipe(
