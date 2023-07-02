@@ -24,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card'
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [],
@@ -51,6 +52,7 @@ import { MatListModule } from '@angular/material/list';
     MatProgressBarModule,
     MatSidenavModule,
     MatListModule,
+    MatGridListModule,
   ],
   exports: [
     DragDropModule,
@@ -77,6 +79,7 @@ import { MatListModule } from '@angular/material/list';
     MatCardModule,
     MatSidenavModule,
     MatListModule,
+    MatGridListModule,
   ],
   providers: [
     {
