@@ -1,4 +1,5 @@
 import { ICategory } from "./ICategory";
+import { ISubCategory } from "./ISubCategory";
 
 export interface IBill {
   id: string;
@@ -10,10 +11,12 @@ export interface IBill {
 }
 
 export interface IBillItem {
+  id?: string;
   billId?: string;
-  categoryId: number;
+  categoryId: string;
   category?: ICategory;
-  description: string;
+  subCategoryId: string;
+  subCategory?: ISubCategory;
   value: number;
 }
 
@@ -30,8 +33,10 @@ export function generateDefaultBill(): IBill {
 
 export function generateDefaultBillItem(): IBillItem {
   return {
-    categoryId: 0,
-    description: '',
+    categoryId: '',
+    category: undefined,
+    subCategoryId: '',
+    subCategory: undefined,
     value: 0,
   }
 }
