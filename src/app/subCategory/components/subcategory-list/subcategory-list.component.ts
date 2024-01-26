@@ -18,8 +18,7 @@ export class SubCategoryListComponent {
 
   dataSource = new MatTableDataSource<ISubCategoryDto>();
 
-  constructor(
-    private subCategoryService: SubCategoryService,
+  constructor(private subCategoryService: SubCategoryService,
     private router: Router,
     private alertService: AlertService) { }
 

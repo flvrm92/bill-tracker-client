@@ -20,6 +20,14 @@ export interface IBillItem {
   value: number;
 }
 
+export interface IBIllDto {
+  id: string;
+  userId: string;
+  payment: Date;
+  total: number;
+  totalIncoming: number;
+}
+
 export function generateDefaultBill(): IBill {
   return {
     id: '',
