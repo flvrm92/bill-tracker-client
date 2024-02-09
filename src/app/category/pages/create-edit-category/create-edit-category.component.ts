@@ -19,12 +19,13 @@ export class CreateEditCategoryComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject();
 
+  isUpdate: boolean = false;
   constructor(
     private fb: FormBuilder,
     private domSanitizer: DomSanitizer,
     private categoryService: CategoryService,
-    private alertService: AlertService,
     private route: ActivatedRoute,
+    private alertService: AlertService,
     private router: Router) {
     this.form = CreateEditCategoryComponent.buildForm(fb, generateDefaultCategory());
   }
@@ -37,6 +38,7 @@ export class CreateEditCategoryComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id') as string;
     if (id) {
+      this.isUpdate = true;
       this.categoryService.getById(id)
         .pipe(takeUntil(this.destroy$))
         .subscribe(category => this.form = CreateEditCategoryComponent.buildForm(this.fb, category));
@@ -54,15 +56,28 @@ export class CreateEditCategoryComponent implements OnInit, OnDestroy {
 
     const request = requestBody.id ? this.categoryService.put(requestBody) : this.categoryService.post(requestBody);
 
-    request.subscribe(result => {
+    request.subscribe(() => {
       this.alertService.toastAlert({
-        title: `Category ${requestBody.id ? 'updated' : 'created'}`,
-        text: `Category ${result.name} was ${requestBody.id ? 'updated' : 'created'} successfully.`,
+        title: `Category ${this.isUpdate ? 'updated' : 'created'}`,
+        text: `Category was ${this.isUpdate ? 'updated' : 'created'} successfully.`,
         icon: AlertIcon.Success,
       });
-
       this.router.navigate(['category']);
     });
+  }
+
+  cancel() {
+    if (this.form.dirty || this.form.touched) {
+      this.alertService.yesOrNoAlert({
+        title: 'Discard changes',
+        text: 'Are you sure you want to discard the changes?',
+        icon: AlertIcon.Warning,
+      }).then(result => {
+        if (result) this.router.navigate(['category'])
+      })
+    } else {
+      this.router.navigate(['category'])
+    }
   }
 
   static buildForm(fb: FormBuilder, category: ICategory): FormGroup<CategoryForm> {

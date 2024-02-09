@@ -1,37 +1,77 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { IBillItem } from 'src/app/core/models';
-import { BillItemForm } from '../../pages/create-edit-bill/create-edit-bill.component';
+import { IBillItem, ISubCategory } from 'src/app/core/models';
+import { SubCategoryService } from 'src/app/subCategory/services/sub-category.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { AddUpdateBillItemComponent } from '../../pages/add-update-bill-item/add-update-bill-item.component';
+import { CreateEditBillComponent } from '../../pages/create-edit-bill/create-edit-bill.component';
 
 @Component({
   selector: 'app-bill-item-list',
   templateUrl: './bill-item-list.component.html',
-  styleUrls: ['./bill-item-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./bill-item-list.component.scss']
 })
-export class BillItemListComponent implements OnChanges {
-  @Input() billItemsFormArray: FormArray<FormGroup<BillItemForm>> | undefined;
+export class BillItemListComponent implements OnInit, OnChanges, AfterViewInit {
+  @Input() billItems: IBillItem[] = [];
 
-
-  displayedColumns: string[] = ['category', 'subcategory', 'value'];
+  displayedColumns: string[] = ['description', 'subcategory', 'value', 'actions'];
 
   dataSource = new MatTableDataSource<IBillItem>();
+  subCategories: ISubCategory[] = [];
 
-  constructor() { }
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+
+  constructor(
+    private subCategoryService: SubCategoryService,
+    private destroyRef: DestroyRef,
+    private dialog: MatDialog) { }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator as MatPaginator;
+  }
+
+  ngOnInit(): void {
+    this.subCategoryService.getAll()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(subCategories => this.subCategories = subCategories);
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('change');
     if (changes['billItems']) {
-      
+      this.updateDataSource();
     }
   }
 
   edit(billItem: IBillItem) {
-    console.log('Edit', billItem);
+    const ref = this.dialog.open<AddUpdateBillItemComponent, IBillItem, IBillItem>(AddUpdateBillItemComponent, {
+      width: '50vw',
+      data: billItem
+    });
+
+
+
   }
 
   delete(billItem: IBillItem) {
     console.log('Delete', billItem);
+  }
+
+  getCategoryName(id: string): string {
+    return this.subCategories.find(c => c.id === id)?.name ?? '';
+  }
+
+  private updateDataSource(): void {
+    this.dataSource.data = this.billItems;
   }
 }

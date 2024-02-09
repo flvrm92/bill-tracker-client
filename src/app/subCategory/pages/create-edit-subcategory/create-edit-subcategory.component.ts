@@ -21,6 +21,8 @@ export class CreateEditSubCategoryComponent implements OnDestroy, OnInit {
 
   private destroy$ = new Subject();
 
+  isUpdate: boolean = false;
+
   constructor(private fb: FormBuilder,
     private categoryService: CategoryService,
     private subCategoryService: SubCategoryService,
@@ -34,6 +36,7 @@ export class CreateEditSubCategoryComponent implements OnDestroy, OnInit {
     this.categories$ = this.categoryService.getAll();
     const id = this.route.snapshot.paramMap.get('id') as string;
     if (id) {
+      this.isUpdate = true;
       this.subCategoryService.getById(id)
         .pipe(takeUntil(this.destroy$))
         .subscribe(subCategory => this.form = CreateEditSubCategoryComponent.buildForm(this.fb, subCategory));
@@ -57,15 +60,29 @@ export class CreateEditSubCategoryComponent implements OnDestroy, OnInit {
 
     const request = requestBody.id ? this.subCategoryService.put(requestBody) : this.subCategoryService.post(requestBody);
 
-    request.subscribe(result => {
+    request.subscribe(() => {
       this.alertService.toastAlert({
-        title: `Sub category ${requestBody.id ? 'updated' : 'created'}`,
-        text: `Sub category ${result.name} was ${requestBody.id ? 'updated' : 'created'} successfully.`,
+        title: `Sub category ${this.isUpdate ? 'updated' : 'created'}`,
+        text: `Sub category ${this.isUpdate ? 'updated' : 'created'} successfully.`,
         icon: AlertIcon.Success,
       });
 
       this.router.navigate(['subCategory']);
     });
+  }
+
+  cancel() {
+    if (this.form.dirty || this.form.touched) {
+      this.alertService.yesOrNoAlert({
+        title: 'Discard changes',
+        text: 'Are you sure you want to discard the changes?',
+        icon: AlertIcon.Warning,
+      }).then(result => {
+        if (result) this.router.navigate(['subCategory'])
+      })
+    } else {
+      this.router.navigate(['subCategory']);
+    }
   }
 
   static buildForm(fb: FormBuilder, subCategory: ISubCategory): FormGroup<SubCategoryForm> {

@@ -3,7 +3,7 @@ import { CategoryListComponent } from "./components/category-list/category-list.
 import { LandingCategoryComponent } from "./pages/landing-category/landing-category.component";
 import { CreateEditCategoryComponent } from "./pages/create-edit-category/create-edit-category.component";
 import { CategoryRoutingModule } from "./category-routing.module";
-import { CommonModule } from "@angular/common";
+import { CommonModule, TitleCasePipe } from "@angular/common";
 import { AppMaterialsModule } from "../app-materials.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
@@ -21,5 +21,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     FormsModule,
   ],
   exports: [],
+  providers: [TitleCasePipe],
 })
 export class CategoryModule { }

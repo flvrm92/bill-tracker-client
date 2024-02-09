@@ -2,10 +2,8 @@ import { ICategory } from "./ICategory";
 import { ISubCategory } from "./ISubCategory";
 
 export interface IBill {
-  id: string;
-  userId: string;
-  payment: Date;
-  total: number;
+  id?: string;
+  paymentMonth: Date;
   totalIncoming: number;
   billItems: IBillItem[];
 }
@@ -13,7 +11,8 @@ export interface IBill {
 export interface IBillItem {
   id?: string;
   billId?: string;
-  categoryId: string;
+  description: string;
+  categoryId: string,
   category?: ICategory;
   subCategoryId: string;
   subCategory?: ISubCategory;
@@ -21,19 +20,25 @@ export interface IBillItem {
 }
 
 export interface IBIllDto {
-  id: string;
-  userId: string;
-  payment: Date;
+  id?: string;
+  paymentMonth: string;
   total: number;
   totalIncoming: number;
+  billItems?: IBillItemDto[];
+}
+
+export interface IBillItemDto {
+  id?: string;
+  billId?: string;
+  description: string;
+  subCategoryId: string;
+  value: number;
 }
 
 export function generateDefaultBill(): IBill {
   return {
     id: '',
-    userId: '',
-    payment: new Date(),
-    total: 0,
+    paymentMonth: new Date(),
     totalIncoming: 0,
     billItems: []
   }
@@ -41,6 +46,9 @@ export function generateDefaultBill(): IBill {
 
 export function generateDefaultBillItem(): IBillItem {
   return {
+    id: '',
+    billId: '',
+    description: '',
     categoryId: '',
     category: undefined,
     subCategoryId: '',

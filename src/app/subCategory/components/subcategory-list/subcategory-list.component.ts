@@ -1,9 +1,10 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
 import { SubCategoryService } from '../../services/sub-category.service';
 import { ISubCategoryDto } from 'src/app/core/models/ISubCategory';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-subcategory-list',
@@ -18,12 +19,18 @@ export class SubCategoryListComponent {
 
   dataSource = new MatTableDataSource<ISubCategoryDto>();
 
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+
   constructor(private subCategoryService: SubCategoryService,
     private router: Router,
     private alertService: AlertService) { }
 
   ngOnInit(): void {
     this.dataSource.data = this.subcategories;
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator as MatPaginator;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

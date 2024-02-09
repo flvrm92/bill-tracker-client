@@ -29,16 +29,16 @@ export class BillService {
       )
   };
 
-  post(bill: IBill): Observable<IBill> {
-    return this.http.post<IBill>(`${this.apiUrl}/bill`, bill)
+  post(bill: IBIllDto): Observable<IBIllDto> {
+    return this.http.post<IBIllDto>(`${this.apiUrl}/bill`, bill)
       .pipe(
         retry(2),
         catchError(logAndHandleHttpError('bill', bill))
       )
   };
 
-  put(bill: IBill): Observable<IBill> {
-    return this.http.put<IBill>(`${this.apiUrl}/bill/${bill.id}`, bill)
+  put(bill: IBIllDto): Observable<IBIllDto> {
+    return this.http.put<IBIllDto>(`${this.apiUrl}/bill/${bill.id}`, bill)
       .pipe(
         retry(2),
         catchError(logAndHandleHttpError('bill', bill))

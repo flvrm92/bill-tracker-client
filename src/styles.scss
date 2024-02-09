@@ -17,3 +17,45 @@ mat-form-field {
   margin-bottom: 1rem;
 }
 
+/* Responsive styles for mat-table */
+
+// Adjust these variables as needed
+$table-padding: 16px;
+
+// Media query for small screens
+@media screen and (max-width: 600px) {
+  .mat-table {
+    overflow-x: auto;
+    display: block;
+    max-width: 100%;
+
+    // Optional: Set a minimum width for the table
+    min-width: 300px;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+
+    // Add padding for better readability
+    padding: $table-padding;
+
+    // Optional: Set a border-bottom for separation
+    border-bottom: 1px solid #ccc;
+
+    &:first-child {
+      // Optional: Set a border-right for separation
+      border-right: 1px solid #ccc;
+    }
+  }
+
+  .mat-header-row,
+  .mat-row {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
