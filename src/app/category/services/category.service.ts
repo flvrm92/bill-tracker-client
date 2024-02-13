@@ -1,9 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Environment } from '../../../environments/environment';
-import { Observable, catchError, retry } from "rxjs";
+import { Observable, ReplaySubject, catchError, retry, share, timer } from "rxjs";
 import { ICategory } from "src/app/core/models/ICategory";
 import { logAndHandleHttpError } from "src/app/shared/http-utilities";
+
+const CACHE_TIMEOUT_MS = 60000;
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +15,19 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
+  private getCategories$: Observable<ICategory[]> | undefined;
   getAll(): Observable<ICategory[]> {
-    return this.http.get<ICategory[]>(`${this.apiUrl}/category`)
-      .pipe(
-        retry(2),
-        catchError(logAndHandleHttpError('category', [] as ICategory[]))
-      )
+    return this.getCategories$ ??
+      (this.getCategories$ = this.http
+        .get<ICategory[]>(`${this.apiUrl}/category`)
+        .pipe(retry(2),
+          catchError(logAndHandleHttpError('category', [] as ICategory[])),
+          share({
+            connector: () => new ReplaySubject(1),
+            resetOnComplete: () => timer(CACHE_TIMEOUT_MS)
+          })
+        )
+      );
   };
 
   getById(id: string): Observable<ICategory> {

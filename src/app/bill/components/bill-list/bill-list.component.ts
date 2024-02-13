@@ -42,6 +42,10 @@ export class BillListComponent implements OnInit {
     this.router.navigate(['bill', bill.id]);
   }
 
+  calcTotal(bill: IBIllDto): number {
+    return bill.billItems?.reduce((acc, item) => acc + item.value, 0) ?? 0;
+  }
+
   async delete(bill: IBIllDto) {
     const confirmRemove = await this.alertService.yesOrNoAlert({
       title: 'Delete bill',
@@ -51,15 +55,32 @@ export class BillListComponent implements OnInit {
 
     if (confirmRemove && bill.id) {
       this.billService.delete(bill.id)
-        .subscribe(() => {
-          this.alertService.toastAlert({
-            title: 'Bill deleted',
-            text: `Bill ${bill.id} was deleted successfully.`,
-          });
-          this.bills = this.bills.filter(c => c.id !== bill.id);
-          this.updateDataSource();
+        .subscribe({
+          next: (result) => this.onSuccessDelete(result),
+          error: (error) => {
+            console.error(error);
+            this.onFailDelete(bill);
+          }
         });
     }
+  }
+
+  private onSuccessDelete(bill: IBIllDto): void {
+    this.alertService.toastAlert({
+      title: 'Bill deleted',
+      text: `Bill ${bill.id} was deleted successfully.`,
+      icon: AlertIcon.Success,
+    });
+    this.bills = this.bills.filter(c => c.id !== bill.id);
+    this.updateDataSource();
+  }
+
+  private onFailDelete(bill: IBIllDto): void {
+    this.alertService.toastAlert({
+      title: 'Bill delete failed',
+      text: `Bill ${bill.id} could not be deleted. Please try again later.`,
+      icon: AlertIcon.Error,
+    });
   }
 
   private updateDataSource(): void {

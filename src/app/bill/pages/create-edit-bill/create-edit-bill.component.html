@@ -35,7 +35,7 @@
       </div>
     </form>
 
-    <app-bill-item-list [billItems]="billItems"></app-bill-item-list>
+    <app-bill-item-list (billItemChange)="onBillItemChange($event)" (billItemDelete)="onBillItemDelete($event)" [billItems]="billItems"></app-bill-item-list>
 
     <div class="my-3">
       <button mat-raised-button color="primary" (click)="addBillItem()">
@@ -50,7 +50,7 @@
       mat-raised-button
       color="primary"
       (click)="save()"
-      [disabled]="form.invalid || !form.dirty"
+      [disabled]="!form.valid || form.pristine"
     >
       <mat-icon>save</mat-icon>
       <span>Save</span>

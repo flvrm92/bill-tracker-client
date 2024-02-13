@@ -4,21 +4,21 @@
       <ng-container matColumnDef="payment">
         <th mat-header-cell *matHeaderCellDef>Payment</th>
         <td class="w-[50%]" mat-cell *matCellDef="let bill">
-          {{ bill.paymentMonth | date }}
+          {{ bill.paymentMonth | date: 'M/y' }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="total">
         <th mat-header-cell *matHeaderCellDef>Total</th>
         <td class="w-[20%]" mat-cell *matCellDef="let bill">
-          {{ bill.total }}
+          {{ calcTotal(bill) | currency:'BRL' }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="totalIncoming">
         <th mat-header-cell *matHeaderCellDef>Total Incoming</th>
         <td class="w-[20%]" mat-cell *matCellDef="let bill">
-          {{ bill.totalIncoming }}
+          {{ bill.totalIncoming | currency:'BRL' }}
         </td>
       </ng-container>
 
