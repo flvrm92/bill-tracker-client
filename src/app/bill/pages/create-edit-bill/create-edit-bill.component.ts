@@ -7,6 +7,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillService } from '../../services/bill.service';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-create-edit-bill',
@@ -21,12 +22,14 @@ export class CreateEditBillComponent implements OnInit {
   billItems: IBillItem[] = [];
   isUpdate: boolean = false;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog,
+  constructor(private fb: FormBuilder,
+    private dialog: MatDialog,
     private destroyRef: DestroyRef,
     private route: ActivatedRoute,
     private billService: BillService,
     private alertService: AlertService,
-    private router: Router) {
+    private router: Router,
+    private currencyPipe: CurrencyPipe) {
 
     this.form = CreateEditBillComponent.buildForm(this.fb, generateDefaultBill());
   }
@@ -42,6 +45,8 @@ export class CreateEditBillComponent implements OnInit {
         this.form.controls.total.setValue(total);
 
         this.billItems = bill.billItems;
+
+        this.calculateTotal();
       });
     }
   }
@@ -86,10 +91,25 @@ export class CreateEditBillComponent implements OnInit {
       if (result) {
         this.form.controls.billItems.push(CreateEditBillComponent.buildBillItemForm(this.fb, result));
         this.billItems = [...this.billItems, result];
-
-        console.log('form', this.form)
+        this.afterFormChanges();
       }
     });
+  }
+
+  onBillItemChange(billItem: IBillItem) {
+    const index = this.billItems.findIndex(bi => bi.id === billItem.id);
+    this.billItems.splice(index, 1, billItem);
+    this.billItems = [...this.billItems];
+    this.form.controls.billItems.at(index).patchValue(billItem);
+    this.afterFormChanges();
+  }
+
+  onBillItemDelete(billItem: IBillItem) {
+    const index = this.billItems.findIndex(bi => bi.id === billItem.id);
+    this.billItems.splice(index, 1);
+    this.billItems = [...this.billItems];
+    this.form.controls.billItems.removeAt(index);
+    this.afterFormChanges();
   }
 
   static buildForm(fb: FormBuilder, bill: IBill): FormGroup<BillForm> {
@@ -136,6 +156,19 @@ export class CreateEditBillComponent implements OnInit {
     if (!d) return new Date().toISOString().split('T')[0];
     else if (typeof d === 'string') return d;
     return d.toISOString().split('T')[0];
+  }
+
+  private calculateTotal() {
+    const total = this.form.controls.billItems.value
+      .map(x => x.value)
+      .reduce((a, b) => (Number(a) ?? 0) + (Number(b) ?? 0), 0);
+
+    this.form.controls.total.setValue(total ?? 0);
+  }
+
+  private afterFormChanges(): void {
+    this.calculateTotal();
+    this.form.markAsDirty();
   }
 
 }

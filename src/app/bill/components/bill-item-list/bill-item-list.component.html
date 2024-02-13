@@ -16,7 +16,7 @@
 
       <ng-container matColumnDef="value">
         <th mat-header-cell *matHeaderCellDef>Value</th>
-        <td class="w-[10%]" mat-cell *matCellDef="let billitem">{{ billitem.value }}</td>
+        <td class="w-[10%]" mat-cell *matCellDef="let billitem">{{ billitem.value | currency: 'BRL' }}</td>
       </ng-container>
 
       <ng-container matColumnDef="actions">

@@ -4,6 +4,7 @@ export interface ISubCategory {
   id: string;
   name: string;
   categoryId: string;
+  category?: ICategory;
   recurring: boolean;
 }
 

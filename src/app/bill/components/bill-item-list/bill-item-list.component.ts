@@ -2,9 +2,11 @@ import {
   AfterViewInit,
   Component,
   DestroyRef,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
@@ -15,7 +17,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUpdateBillItemComponent } from '../../pages/add-update-bill-item/add-update-bill-item.component';
-import { CreateEditBillComponent } from '../../pages/create-edit-bill/create-edit-bill.component';
 
 @Component({
   selector: 'app-bill-item-list',
@@ -24,6 +25,8 @@ import { CreateEditBillComponent } from '../../pages/create-edit-bill/create-edi
 })
 export class BillItemListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() billItems: IBillItem[] = [];
+  @Output() billItemChange = new EventEmitter<IBillItem>();
+  @Output() billItemDelete = new EventEmitter<IBillItem>();
 
   displayedColumns: string[] = ['description', 'subcategory', 'value', 'actions'];
 
@@ -59,12 +62,15 @@ export class BillItemListComponent implements OnInit, OnChanges, AfterViewInit {
       data: billItem
     });
 
-
-
+    ref.afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(result => {
+        this.billItemChange.emit(result);
+      });
   }
 
   delete(billItem: IBillItem) {
-    console.log('Delete', billItem);
+    this.billItemDelete.emit(billItem);
   }
 
   getCategoryName(id: string): string {

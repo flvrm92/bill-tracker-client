@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, retry } from "rxjs";
+import { Observable, catchError, map, retry } from "rxjs";
 import { IBIllDto, IBill } from "src/app/core/models";
 import { logAndHandleHttpError } from "src/app/shared/http-utilities";
 import { Environment } from "src/environments/environment";
@@ -46,8 +46,9 @@ export class BillService {
   };
 
   delete(id: string): Observable<IBIllDto> {
-    return this.http.delete<IBIllDto>(`${this.apiUrl}/bill/${id}`)
+    return this.http.delete<{ data: IBIllDto, message: string, success: boolean }>(`${this.apiUrl}/bill/${id}`)
       .pipe(
+        map(x => x.data),
         retry(2),
         catchError(logAndHandleHttpError('bill', {} as IBIllDto))
       )

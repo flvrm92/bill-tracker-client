@@ -7,8 +7,10 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoryModule } from './category/category.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppMaterialsModule } from './app-materials.module';
+import { CoreModule } from './core/core.module';
+import { ProgressBarInterceptor } from './core/services/progress-bar.interceptor';
 
 @NgModule({
   declarations: [
@@ -16,17 +18,24 @@ import { AppMaterialsModule } from './app-materials.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,    
+    AppRoutingModule,
     HomeModule,
     BrowserModule,
     BrowserAnimationsModule,
     CategoryModule,
     HttpClientModule,
     AppMaterialsModule,
+    CoreModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ProgressBarInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [
-    AppComponent, 
+    AppComponent,
   ]
 })
 export class AppModule { }
