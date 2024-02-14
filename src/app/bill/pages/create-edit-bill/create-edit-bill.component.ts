@@ -7,7 +7,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillService } from '../../services/bill.service';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
-import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-create-edit-bill',
@@ -28,8 +27,7 @@ export class CreateEditBillComponent implements OnInit {
     private route: ActivatedRoute,
     private billService: BillService,
     private alertService: AlertService,
-    private router: Router,
-    private currencyPipe: CurrencyPipe) {
+    private router: Router) {
 
     this.form = CreateEditBillComponent.buildForm(this.fb, generateDefaultBill());
   }
