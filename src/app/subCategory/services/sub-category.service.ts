@@ -41,7 +41,7 @@ export class SubCategoryService {
     return this.http.post<ISubCategory>(`${this.apiUrl}/subcategory`, subCategory)
       .pipe(
         retry(2),
-        catchError(logAndHandleHttpError('subcategory', subCategory))
+        catchError(logAndThrowHttpError<ISubCategory>('post'))
       )
   };
 
@@ -49,7 +49,7 @@ export class SubCategoryService {
     return this.http.put<ISubCategory>(`${this.apiUrl}/subcategory/${subCategory.id}`, subCategory)
       .pipe(
         retry(2),
-        catchError(logAndHandleHttpError('subcategory', subCategory))
+        catchError(logAndThrowHttpError<ISubCategory>('put'))
       )
   };
 
@@ -57,7 +57,7 @@ export class SubCategoryService {
     return this.http.delete<ISubCategory>(`${this.apiUrl}/subcategory/${id}`)
       .pipe(
         retry(2),
-        catchError(logAndHandleHttpError('subcategory', {} as ISubCategory))
+        catchError(logAndThrowHttpError<ISubCategory>('delete'))
       )
   };
 }
