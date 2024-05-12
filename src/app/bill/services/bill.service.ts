@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, catchError, map, retry } from "rxjs";
 import { IBIllDto, IBill } from "src/app/core/models";
-import { logAndHandleHttpError } from "src/app/shared/http-utilities";
+import { logAndHandleHttpError, logAndThrowHttpError } from "src/app/shared/http-utilities";
 import { Environment } from "src/environments/environment";
 
 @Injectable({
@@ -33,7 +33,7 @@ export class BillService {
     return this.http.post<IBIllDto>(`${this.apiUrl}/bill`, bill)
       .pipe(
         retry(2),
-        catchError(logAndHandleHttpError('bill', bill))
+        catchError(logAndThrowHttpError<IBIllDto>('post'))
       )
   };
 
@@ -41,7 +41,7 @@ export class BillService {
     return this.http.put<IBIllDto>(`${this.apiUrl}/bill/${bill.id}`, bill)
       .pipe(
         retry(2),
-        catchError(logAndHandleHttpError('bill', bill))
+        catchError(logAndThrowHttpError<IBIllDto>('put'))
       )
   };
 
@@ -50,7 +50,7 @@ export class BillService {
       .pipe(
         map(x => x.data),
         retry(2),
-        catchError(logAndHandleHttpError('bill', {} as IBIllDto))
+        catchError(logAndThrowHttpError<IBIllDto>('delete'))
       )
   };
 

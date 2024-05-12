@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Environment } from '../../../environments/environment';
 import { Observable, ReplaySubject, catchError, retry, share, timer } from "rxjs";
 import { ICategory } from "src/app/core/models/ICategory";
-import { logAndHandleHttpError } from "src/app/shared/http-utilities";
+import { logAndHandleHttpError, logAndThrowHttpError } from "src/app/shared/http-utilities";
 
 const CACHE_TIMEOUT_MS = 60000;
 
@@ -42,7 +42,7 @@ export class CategoryService {
     return this.http.post<ICategory>(`${this.apiUrl}/category`, category)
       .pipe(
         retry(2),
-        catchError(logAndHandleHttpError('category', category))
+        catchError(logAndThrowHttpError<ICategory>('post'))
       )
   };
 
@@ -50,7 +50,7 @@ export class CategoryService {
     return this.http.put<ICategory>(`${this.apiUrl}/category/${category.id}`, category)
       .pipe(
         retry(2),
-        catchError(logAndHandleHttpError('category', category))
+        catchError(logAndThrowHttpError<ICategory>('put'))
       )
   };
 
@@ -58,7 +58,7 @@ export class CategoryService {
     return this.http.delete<ICategory>(`${this.apiUrl}/category/${id}`)
       .pipe(
         retry(2),
-        catchError(logAndHandleHttpError('category', {} as ICategory))
+        catchError(logAndThrowHttpError<ICategory>('delete'))
       )
   };
 }

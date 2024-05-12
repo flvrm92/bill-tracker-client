@@ -40,7 +40,7 @@ export class CreateEditBillComponent implements OnInit {
         this.form = CreateEditBillComponent.buildForm(this.fb, bill);
 
         const total = bill.billItems?.map(bi => bi.value).reduce((a, b) => a + b, 0);
-        this.form.controls.total.setValue(total);
+        this.form.controls.total.setValue(total.toFixed(2));
 
         this.billItems = bill.billItems;
 
@@ -114,7 +114,7 @@ export class CreateEditBillComponent implements OnInit {
     return fb.nonNullable.group({
       id: bill?.id,
       payment: bill?.paymentMonth,
-      total: 0,
+      total: '0',
       totalIncoming: bill?.totalIncoming,
       billItems: fb.array<FormGroup<BillItemForm>>(
         bill?.billItems?.map(bi => CreateEditBillComponent.buildBillItemForm(fb, bi))) ?? [generateDefaultBillItem()]
@@ -161,7 +161,7 @@ export class CreateEditBillComponent implements OnInit {
       .map(x => x.value)
       .reduce((a, b) => (Number(a) ?? 0) + (Number(b) ?? 0), 0);
 
-    this.form.controls.total.setValue(total ?? 0);
+    this.form.controls.total.setValue(total?.toFixed(2) ?? '0');
   }
 
   private afterFormChanges(): void {
@@ -174,7 +174,7 @@ export class CreateEditBillComponent implements OnInit {
 export interface BillForm {
   id: FormControl<string | undefined>,
   payment: FormControl<Date>,
-  total: FormControl<number>,
+  total: FormControl<string>,
   totalIncoming: FormControl<number>,
   billItems: FormArray<FormGroup<BillItemForm>>,
 }

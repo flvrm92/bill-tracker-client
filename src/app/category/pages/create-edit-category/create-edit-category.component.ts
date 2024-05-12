@@ -56,14 +56,26 @@ export class CreateEditCategoryComponent implements OnInit, OnDestroy {
 
     const request = requestBody.id ? this.categoryService.put(requestBody) : this.categoryService.post(requestBody);
 
-    request.subscribe(() => {
-      this.alertService.toastAlert({
-        title: `Category ${this.isUpdate ? 'updated' : 'created'}`,
-        text: `Category was ${this.isUpdate ? 'updated' : 'created'} successfully.`,
-        icon: AlertIcon.Success,
-      });
-      this.router.navigate(['category']);
+    request.subscribe({
+      next: (result) => this.onSuccessfulSave(result),
+      error: (err) => {
+        const msg = err?.error.message ?? 'An error occurred while saving category';
+        this.alertService.toastAlert({
+          title: 'Error',
+          text: msg,
+          icon: AlertIcon.Error,
+        });
+      }
     });
+  }
+
+  private onSuccessfulSave(result: any) {
+    this.alertService.toastAlert({
+      title: `Category ${this.isUpdate ? 'updated' : 'created'}`,
+      text: `Category was ${this.isUpdate ? 'updated' : 'created'} successfully.`,
+      icon: AlertIcon.Success,
+    });
+    this.router.navigate(['category']);
   }
 
   cancel() {
