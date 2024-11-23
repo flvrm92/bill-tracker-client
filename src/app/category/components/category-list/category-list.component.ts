@@ -7,9 +7,10 @@ import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.scss']
+    selector: 'app-category-list',
+    templateUrl: './category-list.component.html',
+    styleUrls: ['./category-list.component.scss'],
+    standalone: false
 })
 export class CategoryListComponent implements OnInit {
 

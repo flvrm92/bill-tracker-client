@@ -9,9 +9,10 @@ import { Subject, takeUntil, Observable } from 'rxjs';
 import { ICategory } from 'src/app/core/models/ICategory';
 
 @Component({
-  selector: 'app-create-edit-subcategory',
-  templateUrl: './create-edit-subcategory.component.html',
-  styleUrls: ['./create-edit-subcategory.component.scss']
+    selector: 'app-create-edit-subcategory',
+    templateUrl: './create-edit-subcategory.component.html',
+    styleUrls: ['./create-edit-subcategory.component.scss'],
+    standalone: false
 })
 export class CreateEditSubCategoryComponent implements OnDestroy, OnInit {
   subCategory: ISubCategory | undefined;

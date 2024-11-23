@@ -4,9 +4,10 @@ import { ISubCategoryDto } from 'src/app/core/models/ISubCategory';
 import { SubCategoryService } from '../../services/sub-category.service';
 
 @Component({
-  selector: 'app-landing-subcategory',
-  templateUrl: './landing-subcategory.component.html',
-  styleUrls: ['./landing-subcategory.component.scss']
+    selector: 'app-landing-subcategory',
+    templateUrl: './landing-subcategory.component.html',
+    styleUrls: ['./landing-subcategory.component.scss'],
+    standalone: false
 })
 export class LandingSubCategoryComponent {
 

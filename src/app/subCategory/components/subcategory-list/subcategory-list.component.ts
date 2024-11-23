@@ -7,9 +7,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-subcategory-list',
-  templateUrl: './subcategory-list.component.html',
-  styleUrls: ['./subcategory-list.component.scss']
+    selector: 'app-subcategory-list',
+    templateUrl: './subcategory-list.component.html',
+    styleUrls: ['./subcategory-list.component.scss'],
+    standalone: false
 })
 export class SubCategoryListComponent {
 
