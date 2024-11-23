@@ -7,9 +7,10 @@ import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-bill-list',
-  templateUrl: './bill-list.component.html',
-  styleUrls: ['./bill-list.component.scss']
+    selector: 'app-bill-list',
+    templateUrl: './bill-list.component.html',
+    styleUrls: ['./bill-list.component.scss'],
+    standalone: false
 })
 export class BillListComponent implements OnInit {
   @Input() bills: IBIllDto[] = [];

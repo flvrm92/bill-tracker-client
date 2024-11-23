@@ -4,9 +4,10 @@ import { Subject, takeUntil } from 'rxjs';
 import { ICategory } from 'src/app/core/models/ICategory';
 
 @Component({
-  selector: 'app-landing-category',
-  templateUrl: './landing-category.component.html',
-  styleUrls: ['./landing-category.component.scss']
+    selector: 'app-landing-category',
+    templateUrl: './landing-category.component.html',
+    styleUrls: ['./landing-category.component.scss'],
+    standalone: false
 })
 export class LandingCategoryComponent implements OnInit, OnDestroy {
 

@@ -19,9 +19,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddUpdateBillItemComponent } from '../../pages/add-update-bill-item/add-update-bill-item.component';
 
 @Component({
-  selector: 'app-bill-item-list',
-  templateUrl: './bill-item-list.component.html',
-  styleUrls: ['./bill-item-list.component.scss']
+    selector: 'app-bill-item-list',
+    templateUrl: './bill-item-list.component.html',
+    styleUrls: ['./bill-item-list.component.scss'],
+    standalone: false
 })
 export class BillItemListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() billItems: IBillItem[] = [];

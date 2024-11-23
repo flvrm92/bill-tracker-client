@@ -8,9 +8,10 @@ import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-edit-caetgory',
-  templateUrl: './create-edit-category.component.html',
-  styleUrls: ['./create-edit-category.component.scss']
+    selector: 'app-create-edit-caetgory',
+    templateUrl: './create-edit-category.component.html',
+    styleUrls: ['./create-edit-category.component.scss'],
+    standalone: false
 })
 export class CreateEditCategoryComponent implements OnInit, OnDestroy {
   category: ICategory | undefined;

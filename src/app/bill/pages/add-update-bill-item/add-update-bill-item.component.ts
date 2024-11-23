@@ -9,9 +9,10 @@ import { forkJoin } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-add-update-bill-item',
-  templateUrl: './add-update-bill-item.component.html',
-  styleUrl: './add-update-bill-item.component.scss'
+    selector: 'app-add-update-bill-item',
+    templateUrl: './add-update-bill-item.component.html',
+    styleUrl: './add-update-bill-item.component.scss',
+    standalone: false
 })
 export class AddUpdateBillItemComponent implements OnInit {
 

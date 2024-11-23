@@ -4,9 +4,10 @@ import { IBIllDto, ISubCategory } from 'src/app/core/models';
 import { BillService } from '../../services/bill.service';
 
 @Component({
-  selector: 'app-landing-bill',
-  templateUrl: './landing-bill.component.html',
-  styleUrls: ['./landing-bill.component.scss']
+    selector: 'app-landing-bill',
+    templateUrl: './landing-bill.component.html',
+    styleUrls: ['./landing-bill.component.scss'],
+    standalone: false
 })
 export class LandingBillComponent implements OnInit {
 
