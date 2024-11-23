@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@use "tailwindcss/base";
+@use "tailwindcss/utilities";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -10,6 +9,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
   flex-direction: column;  
   margin-top: 20px;
+  width: 100%;
 }
 
 mat-form-field {
@@ -21,41 +21,3 @@ mat-form-field {
 
 // Adjust these variables as needed
 $table-padding: 16px;
-
-// Media query for small screens
-@media screen and (max-width: 600px) {
-  .mat-table {
-    overflow-x: auto;
-    display: block;
-    max-width: 100%;
-
-    // Optional: Set a minimum width for the table
-    min-width: 300px;
-  }
-
-  .mat-header-cell,
-  .mat-cell {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-
-    // Add padding for better readability
-    padding: $table-padding;
-
-    // Optional: Set a border-bottom for separation
-    border-bottom: 1px solid #ccc;
-
-    &:first-child {
-      // Optional: Set a border-right for separation
-      border-right: 1px solid #ccc;
-    }
-  }
-
-  .mat-header-row,
-  .mat-row {
-    box-sizing: border-box;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-  }
-}
