@@ -11,33 +11,41 @@ import {
   ViewChild
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { IBillItem, ISubCategory } from 'src/app/core/models';
+import { IBillItem, ICategory, ISubCategory } from 'src/app/core/models';
 import { SubCategoryService } from 'src/app/subCategory/services/sub-category.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUpdateBillItemComponent } from '../../pages/add-update-bill-item/add-update-bill-item.component';
+import { forkJoin } from 'rxjs';
+import { CategoryService } from 'src/app/category/services/category.service';
+import { PAGINATOR_DEFAULT_PAGE_SIZE, PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS } from 'src/app/config';
 
 @Component({
-    selector: 'app-bill-item-list',
-    templateUrl: './bill-item-list.component.html',
-    styleUrls: ['./bill-item-list.component.scss'],
-    standalone: false
+  selector: 'app-bill-item-list',
+  templateUrl: './bill-item-list.component.html',
+  styleUrls: ['./bill-item-list.component.scss'],
+  standalone: false
 })
 export class BillItemListComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() billItems: IBillItem[] = [];
   @Output() billItemChange = new EventEmitter<IBillItem>();
   @Output() billItemDelete = new EventEmitter<IBillItem>();
 
-  displayedColumns: string[] = ['description', 'subcategory', 'value', 'actions'];
+  displayedColumns: string[] = ['subcategory', 'category', 'value', 'actions'];
 
   dataSource = new MatTableDataSource<IBillItem>();
   subCategories: ISubCategory[] = [];
+  categoryies: ICategory[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
+  paginatorPageSize = PAGINATOR_DEFAULT_PAGE_SIZE;
+  paginatorPageSizeOptions = PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS;
+
   constructor(
     private subCategoryService: SubCategoryService,
+    private categoryService: CategoryService,
     private destroyRef: DestroyRef,
     private dialog: MatDialog) { }
 
@@ -46,9 +54,15 @@ export class BillItemListComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.subCategoryService.getAll()
+    forkJoin([
+      this.subCategoryService.getAll(),
+      this.categoryService.getAll()
+    ])
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(subCategories => this.subCategories = subCategories);
+      .subscribe(([subCategories, categories]) => {
+        this.subCategories = subCategories;
+        this.categoryies = categories;
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -66,6 +80,7 @@ export class BillItemListComponent implements OnInit, OnChanges, AfterViewInit {
     ref.afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {
+        if (!result) return;
         this.billItemChange.emit(result);
       });
   }
@@ -74,11 +89,20 @@ export class BillItemListComponent implements OnInit, OnChanges, AfterViewInit {
     this.billItemDelete.emit(billItem);
   }
 
-  getCategoryName(id: string): string {
+  getSubCategoryName(id: string): string {
     return this.subCategories.find(c => c.id === id)?.name ?? '';
   }
 
+  getCategoryName(subCategoryId: string): string {
+    const subCategory = this.subCategories.find(sc => sc.id === subCategoryId);
+    return this.categoryies.find(c => c.id === subCategory?.categoryId)?.name ?? '';
+  }
+
   private updateDataSource(): void {
-    this.dataSource.data = this.billItems;
+    this.dataSource.data = this.billItems.sort((a, b) => {
+      const va = a.value ?? 0;
+      const vb = b.value ?? 0;
+      return vb - va;
+    });
   }
 }

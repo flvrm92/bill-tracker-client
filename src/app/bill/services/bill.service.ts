@@ -54,5 +54,11 @@ export class BillService {
       )
   };
 
-
+  copy(id: string): Observable<IBIllDto> {
+    return this.http.post<IBIllDto>(`${this.apiUrl}/bill/copy/${id}`, {})
+      .pipe(
+        retry(2),
+        catchError(logAndThrowHttpError<IBIllDto>('copy'))
+      )
+  }
 }

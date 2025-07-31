@@ -5,12 +5,13 @@ import { BillService } from '../../services/bill.service';
 import { Router } from '@angular/router';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { PAGINATOR_DEFAULT_PAGE_SIZE, PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS } from 'src/app/config';
 
 @Component({
-    selector: 'app-bill-list',
-    templateUrl: './bill-list.component.html',
-    styleUrls: ['./bill-list.component.scss'],
-    standalone: false
+  selector: 'app-bill-list',
+  templateUrl: './bill-list.component.html',
+  styleUrls: ['./bill-list.component.scss'],
+  standalone: false
 })
 export class BillListComponent implements OnInit {
   @Input() bills: IBIllDto[] = [];
@@ -20,6 +21,9 @@ export class BillListComponent implements OnInit {
   dataSource = new MatTableDataSource<IBIllDto>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+
+  paginatorPageSize = PAGINATOR_DEFAULT_PAGE_SIZE;
+  paginatorPageSizeOptions = PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS;
 
   constructor(private billService: BillService,
     private router: Router,
@@ -61,6 +65,37 @@ export class BillListComponent implements OnInit {
           error: (error) => {
             console.error(error);
             this.onFailDelete(bill);
+          }
+        });
+    }
+  }
+
+  async copy(bill: IBIllDto) {
+    const confirmCopy = await this.alertService.yesOrNoAlert({
+      title: 'Copy bill',
+      text: `Are you sure you want to copy this bill? It will create a new bill with the same items.`,
+      icon: AlertIcon.Question
+    });
+
+    if (confirmCopy && bill.id) {
+      this.billService.copy(bill.id)
+        .subscribe({
+          next: (result) => {
+            this.alertService.toastAlert({
+              title: 'Bill copied',
+              text: `Bill ${bill.id} was copied successfully.`,
+              icon: AlertIcon.Success,
+            });
+            this.bills.push(result);
+            this.updateDataSource();
+          },
+          error: (error) => {
+            console.error(error);
+            this.alertService.toastAlert({
+              title: 'Bill copy failed',
+              text: `Bill ${bill.id} could not be copied. Please try again later.`,
+              icon: AlertIcon.Error,
+            });
           }
         });
     }

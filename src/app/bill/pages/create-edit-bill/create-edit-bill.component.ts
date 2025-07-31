@@ -9,10 +9,10 @@ import { BillService } from '../../services/bill.service';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
 
 @Component({
-    selector: 'app-create-edit-bill',
-    templateUrl: './create-edit-bill.component.html',
-    styleUrls: ['./create-edit-bill.component.scss'],
-    standalone: false
+  selector: 'app-create-edit-bill',
+  templateUrl: './create-edit-bill.component.html',
+  styleUrls: ['./create-edit-bill.component.scss'],
+  standalone: false
 })
 export class CreateEditBillComponent implements OnInit {
   bill: IBill | undefined;
@@ -40,7 +40,7 @@ export class CreateEditBillComponent implements OnInit {
       this.billService.getById(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(bill => {
         this.form = CreateEditBillComponent.buildForm(this.fb, bill);
 
-        const total = bill.billItems?.map(bi => bi.value).reduce((a, b) => a + b, 0);
+        const total = bill.billItems?.map(bi => bi.value ?? 0).reduce((a, b) => a + b, 0);
         this.form.controls.total.setValue(total.toFixed(2));
 
         this.billItems = bill.billItems;
@@ -188,5 +188,5 @@ export interface BillItemForm {
   category: FormControl<ICategory | undefined>,
   subCategoryId: FormControl<string>,
   subCategory: FormControl<ISubCategory | undefined>,
-  value: FormControl<number>,
+  value: FormControl<number | undefined>,
 }

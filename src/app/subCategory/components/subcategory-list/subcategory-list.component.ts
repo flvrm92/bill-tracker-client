@@ -5,6 +5,7 @@ import { SubCategoryService } from '../../services/sub-category.service';
 import { ISubCategoryDto } from 'src/app/core/models/ISubCategory';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS, PAGINATOR_DEFAULT_PAGE_SIZE } from 'src/app/config';
 
 @Component({
     selector: 'app-subcategory-list',
@@ -21,6 +22,9 @@ export class SubCategoryListComponent {
   dataSource = new MatTableDataSource<ISubCategoryDto>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+
+  paginatorPageSize = PAGINATOR_DEFAULT_PAGE_SIZE;
+  paginatorPageSizeOptions = PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS;
 
   constructor(private subCategoryService: SubCategoryService,
     private router: Router,

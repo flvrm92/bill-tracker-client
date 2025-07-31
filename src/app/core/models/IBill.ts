@@ -16,7 +16,7 @@ export interface IBillItem {
   category?: ICategory;
   subCategoryId: string;
   subCategory?: ISubCategory;
-  value: number;
+  value: number | undefined;
 }
 
 export interface IBIllDto {
@@ -53,6 +53,6 @@ export function generateDefaultBillItem(): IBillItem {
     category: undefined,
     subCategoryId: '',
     subCategory: undefined,
-    value: 0,
+    value: undefined,
   }
 }
