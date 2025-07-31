@@ -5,14 +5,14 @@ import { IBillItem, ICategory, ISubCategory, generateDefaultBillItem } from 'src
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoryService } from 'src/app/category/services/category.service';
 import { SubCategoryService } from 'src/app/subCategory/services/sub-category.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-    selector: 'app-add-update-bill-item',
-    templateUrl: './add-update-bill-item.component.html',
-    styleUrl: './add-update-bill-item.component.scss',
-    standalone: false
+  selector: 'app-add-update-bill-item',
+  templateUrl: './add-update-bill-item.component.html',
+  styleUrl: './add-update-bill-item.component.scss',
+  standalone: false
 })
 export class AddUpdateBillItemComponent implements OnInit {
 
@@ -21,6 +21,8 @@ export class AddUpdateBillItemComponent implements OnInit {
   categories: ICategory[];
   allSubCategories: ISubCategory[];
   subCategories: ISubCategory[];
+
+  filteredCategories$: Observable<ICategory[]>;
 
   isUpdate: boolean = false;
   billItemInputData: IBillItem;
@@ -39,7 +41,7 @@ export class AddUpdateBillItemComponent implements OnInit {
     }
 
     this.form = CreateEditBillComponent.buildBillItemForm(this.fb, generateDefaultBillItem());
-    
+
     this.form.controls.categoryId.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(id => this.subCategories = this.allSubCategories.filter(sc => sc.categoryId === id));
@@ -52,7 +54,8 @@ export class AddUpdateBillItemComponent implements OnInit {
         this.categories = categories;
         this.allSubCategories = allSubCategories;
 
-        if (this.isUpdate) this.fillForm();
+        if (this.isUpdate)
+          this.fillForm();
       });
   }
 
@@ -72,7 +75,7 @@ export class AddUpdateBillItemComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private fillForm(): void {    
+  private fillForm(): void {
     const subCategory = this.allSubCategories.find(sc => sc.id === this.billItemInputData.subCategoryId);
     this.subCategories = this.allSubCategories.filter(sc => sc.categoryId === subCategory?.categoryId);
 

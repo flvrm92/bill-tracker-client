@@ -5,12 +5,13 @@ import { CategoryService } from '../../services/category.service';
 import { Router } from '@angular/router';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { PAGINATOR_DEFAULT_PAGE_SIZE, PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS } from 'src/app/config';
 
 @Component({
-    selector: 'app-category-list',
-    templateUrl: './category-list.component.html',
-    styleUrls: ['./category-list.component.scss'],
-    standalone: false
+  selector: 'app-category-list',
+  templateUrl: './category-list.component.html',
+  styleUrls: ['./category-list.component.scss'],
+  standalone: false
 })
 export class CategoryListComponent implements OnInit {
 
@@ -21,6 +22,9 @@ export class CategoryListComponent implements OnInit {
   dataSource = new MatTableDataSource<ICategory>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+
+  paginatorPageSize = PAGINATOR_DEFAULT_PAGE_SIZE;
+  paginatorPageSizeOptions = PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS;
 
   constructor(private categoryService: CategoryService,
     private router: Router,

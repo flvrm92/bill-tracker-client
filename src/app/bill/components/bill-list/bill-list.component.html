@@ -3,8 +3,8 @@
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="payment">
         <th mat-header-cell *matHeaderCellDef>Payment</th>
-        <td class="w-[50%]" mat-cell *matCellDef="let bill">
-          {{ bill.paymentMonth | date: 'M/y' }}
+        <td class="w-[40%]" mat-cell *matCellDef="let bill">
+          {{ bill.paymentMonth | date: 'MM/y' }}
         </td>
       </ng-container>
 
@@ -31,6 +31,9 @@
           <button mat-icon-button color="warn" (click)="delete(bill)">
             <mat-icon>delete</mat-icon>
           </button>
+          <button mat-icon-button color="warn" (click)="copy(bill)">
+            <mat-icon>content_copy</mat-icon>
+          </button>
         </td>
       </ng-container>
 
@@ -38,11 +41,8 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
-    <mat-paginator
-      [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons
-      aria-label="Select page of periodic elements"
-    >
+    <mat-paginator [pageSizeOptions]="paginatorPageSizeOptions" [pageSize]="paginatorPageSize" showFirstLastButtons
+      aria-label="Select page of periodic elements">
     </mat-paginator>
   </div>
 </div>
