@@ -15,13 +15,13 @@
 
       <ng-container matColumnDef="recurring">
         <th mat-header-cell *matHeaderCellDef>Recurring bill item</th>
-        <td class="w-[30%]" mat-cell *matCellDef="let subCategory">
+        <td class="w-[20%]" mat-cell *matCellDef="let subCategory">
           {{ subCategory.recurring ? "Yes" : "No" }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let subCategory">
           <button mat-icon-button color="primary" (click)="edit(subCategory)">
             <mat-icon>edit</mat-icon>
