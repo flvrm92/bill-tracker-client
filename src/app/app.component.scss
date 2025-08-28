@@ -1,7 +1,47 @@
-mat-sidenav-container {
-  height: calc(100% - 64px);
+.app-toolbar {
+  // position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-mat-sidenav-content {
+.spacer {
+  flex: 1 1 auto;
+}
+
+.app-sidenav {
+  border-right: 1px solid var(--mdc-theme-outline, #e0e0e0);
+  overflow-x: hidden;
+  margin-top: 64px;
+}
+
+.main-content {
+  background-color: var(--mdc-theme-background, #fafafa);
+}
+
+.content-wrapper {
   padding: 24px;
+  min-height: calc(100vh - 64px - 48px);
+}
+
+:host-context(.dark-theme) {
+  .app-sidenav {
+    border-right-color: #333;
+  }
+
+  .main-content {
+    background-color: #121212;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .app-sidenav {
+    width: 100vw;
+  }
+
+  .content-wrapper {
+    padding: 16px;
+  }
 }

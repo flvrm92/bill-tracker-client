@@ -1,0 +1,121 @@
+:host {
+  display: block;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+mat-nav-list {
+  width: 100%;
+  padding: 8px 0;
+}
+
+.parent-item {
+  font-weight: 300;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 4px 8px;
+  transition: all 0.3s ease;
+  width: calc(100% - 16px);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &.active-parent {
+    background-color: rgba(var(--primary-color), 0.1);
+    color: var(--primary-color);
+  }
+
+  .expand-icon {
+    transition: transform 0.3s ease;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.child-item {
+  padding-left: 3rem;
+  margin: 2px 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  width: calc(100% - 16px);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &.active-route {
+    background-color: rgba(var(--primary-color), 0.12);
+    color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
+  }
+}
+
+.single-item {
+  font-weight: 500;
+  border-radius: 8px;
+  margin: 4px 8px;
+  transition: all 0.3s ease;
+  width: calc(100% - 16px);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &.active-route {
+    background-color: rgba(var(--primary-color), 0.12);
+    color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
+  }
+}
+
+.children-container {
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 0 0 8px 8px;
+  margin: 0 8px 8px 8px;
+  padding-bottom: 4px;
+  width: calc(100% - 16px);
+  overflow: hidden;
+}
+
+// Dark theme overrides
+:host-context(.dark-theme) {
+
+  .parent-item,
+  .child-item,
+  .single-item {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .parent-item.active-parent,
+  .child-item.active-route,
+  .single-item.active-route {
+    background-color: rgba(var(--primary-color), 0.2);
+    color: var(--primary-color);
+  }
+
+  .children-container {
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+
+  .parent-item,
+  .child-item,
+  .single-item {
+    margin: 2px 4px;
+    padding: 12px;
+  }
+
+  .child-item {
+    padding-left: 2.5rem;
+  }
+}

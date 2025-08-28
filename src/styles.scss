@@ -1,14 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
-@use "tailwindcss/base";
-@use "tailwindcss/utilities";
+@use 'tailwindcss/base';
+@use 'tailwindcss/components';
+@use 'tailwindcss/utilities';
+@use './themes/material-theme.scss';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-.container {
+.content {
   display: flex;
-  flex-direction: column;  
-  margin-top: 20px;
+  flex-direction: column;
+  margin-top: 1.25rem;
   width: 100%;
 }
 
@@ -18,6 +24,24 @@ mat-form-field {
 }
 
 /* Responsive styles for mat-table */
+@media (max-width: 768px) {
+  .content {
+    margin-top: 0.75rem;
+    padding: 0 0.5rem;
+  }
+
+  mat-form-field {
+    margin-bottom: 0.75rem;
+  }
+}
+
+.mat-column-actions {
+  text-align: end !important;
+}
+
+.mat-mdc-header-cell {
+  font-weight: 700;
+}
 
 // Adjust these variables as needed
 $table-padding: 16px;
