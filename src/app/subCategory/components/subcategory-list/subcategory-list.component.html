@@ -13,10 +13,10 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="recurring">
-        <th mat-header-cell *matHeaderCellDef>Recurring bill item</th>
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef>Active</th>
         <td class="w-[20%]" mat-cell *matCellDef="let subCategory">
-          {{ subCategory.recurring ? "Yes" : "No" }}
+          {{ subCategory.active ? "Yes" : "No" }}
         </td>
       </ng-container>
 

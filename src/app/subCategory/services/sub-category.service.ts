@@ -21,6 +21,14 @@ export class SubCategoryService {
       )
   };
 
+  getActive(): Observable<ISubCategoryDto[]> {
+    return this.http.get<ISubCategoryDto[]>(`${this.apiUrl}/subcategory`)
+      .pipe(
+        retry(2),
+        catchError(logAndHandleHttpError('subcategory', [] as ISubCategoryDto[]))
+      )
+  };
+
   getById(id: string): Observable<ISubCategoryDto> {
     return this.http.get<ISubCategoryDto>(`${this.apiUrl}/subcategory/${id}`)
       .pipe(

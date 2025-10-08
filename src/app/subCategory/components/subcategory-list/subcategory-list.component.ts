@@ -8,16 +8,16 @@ import { MatPaginator } from '@angular/material/paginator';
 import { PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS, PAGINATOR_DEFAULT_PAGE_SIZE } from 'src/app/config';
 
 @Component({
-    selector: 'app-subcategory-list',
-    templateUrl: './subcategory-list.component.html',
-    styleUrls: ['./subcategory-list.component.scss'],
-    standalone: false
+  selector: 'app-subcategory-list',
+  templateUrl: './subcategory-list.component.html',
+  styleUrls: ['./subcategory-list.component.scss'],
+  standalone: false
 })
 export class SubCategoryListComponent {
 
   @Input() subcategories: ISubCategoryDto[] = [];
 
-  displayedColumns: string[] = ['name', 'category', 'recurring', 'actions'];
+  displayedColumns: string[] = ['name', 'category', 'active', 'actions'];
 
   dataSource = new MatTableDataSource<ISubCategoryDto>();
 

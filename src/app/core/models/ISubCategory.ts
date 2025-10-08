@@ -5,7 +5,7 @@ export interface ISubCategory {
   name: string;
   categoryId: string;
   category?: ICategory;
-  recurring: boolean;
+  active: boolean;
 }
 
 export interface ISubCategoryDto {
@@ -13,7 +13,7 @@ export interface ISubCategoryDto {
   name: string;
   category: ICategory;
   categoryId: string;
-  recurring: boolean;
+  active: boolean;
 }
 
 export function generateDefaultSubCategory(): ISubCategory {
@@ -21,6 +21,6 @@ export function generateDefaultSubCategory(): ISubCategory {
     id: '',
     name: '',
     categoryId: '',
-    recurring: false,
+    active: false,
   }
 }

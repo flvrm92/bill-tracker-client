@@ -109,7 +109,8 @@ export class CreateEditBillComponent implements OnInit {
     const index = this.billItems.findIndex(bi => bi.id === billItem.id);
     this.billItems.splice(index, 1);
     this.billItems = [...this.billItems];
-    this.form.controls.billItems.removeAt(index);
+    const formIndex = this.form.controls.billItems.value.findIndex(bi => bi.id === billItem.id);
+    this.form.controls.billItems.removeAt(formIndex);
     this.afterFormChanges();
   }
 

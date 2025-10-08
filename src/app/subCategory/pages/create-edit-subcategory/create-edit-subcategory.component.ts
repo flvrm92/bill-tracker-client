@@ -9,10 +9,10 @@ import { Subject, takeUntil, Observable } from 'rxjs';
 import { ICategory } from 'src/app/core/models/ICategory';
 
 @Component({
-    selector: 'app-create-edit-subcategory',
-    templateUrl: './create-edit-subcategory.component.html',
-    styleUrls: ['./create-edit-subcategory.component.scss'],
-    standalone: false
+  selector: 'app-create-edit-subcategory',
+  templateUrl: './create-edit-subcategory.component.html',
+  styleUrls: ['./create-edit-subcategory.component.scss'],
+  standalone: false
 })
 export class CreateEditSubCategoryComponent implements OnDestroy, OnInit {
   subCategory: ISubCategory | undefined;
@@ -56,7 +56,7 @@ export class CreateEditSubCategoryComponent implements OnDestroy, OnInit {
       id: subCategory.id,
       name: subCategory.name,
       categoryId: subCategory.categoryId,
-      recurring: subCategory.recurring
+      active: subCategory.active
     }
 
     const request = requestBody.id ? this.subCategoryService.put(requestBody) : this.subCategoryService.post(requestBody);
@@ -91,7 +91,7 @@ export class CreateEditSubCategoryComponent implements OnDestroy, OnInit {
       id: subCategory.id,
       name: [subCategory.name, Validators.required],
       categoryId: [subCategory.categoryId, Validators.required],
-      recurring: [subCategory.recurring, Validators.required]
+      active: [subCategory.active, Validators.required]
     });
   }
 }
@@ -106,5 +106,5 @@ export interface SubCategoryForm {
   id: FormControl<string>,
   name: FormControl<string>,
   categoryId: FormControl<string>,
-  recurring: FormControl<boolean>
+  active: FormControl<boolean>
 }

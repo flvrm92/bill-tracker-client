@@ -44,7 +44,7 @@ export class AddUpdateBillItemComponent implements OnInit {
 
     this.form.controls.categoryId.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(id => this.subCategories = this.allSubCategories.filter(sc => sc.categoryId === id));
+      .subscribe(id => this.subCategories = this.allSubCategories.filter(sc => sc.categoryId === id && sc.active));
   }
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class AddUpdateBillItemComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(([categories, allSubCategories]) => {
         this.categories = categories;
-        this.allSubCategories = allSubCategories;
+        this.allSubCategories = allSubCategories.filter(sc => sc.active);
 
         if (this.isUpdate)
           this.fillForm();
@@ -77,7 +77,7 @@ export class AddUpdateBillItemComponent implements OnInit {
 
   private fillForm(): void {
     const subCategory = this.allSubCategories.find(sc => sc.id === this.billItemInputData.subCategoryId);
-    this.subCategories = this.allSubCategories.filter(sc => sc.categoryId === subCategory?.categoryId);
+    this.subCategories = this.allSubCategories.filter(sc => sc.categoryId === subCategory?.categoryId && sc.active);
 
     const billItem = {
       id: this.billItemInputData.id,
