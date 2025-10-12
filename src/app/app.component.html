@@ -1,21 +1,30 @@
 <app-progress-bar class="z-50"></app-progress-bar>
-<mat-toolbar class="app-toolbar">
-  <button mat-icon-button (click)="sidenav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span class="app-title">Bill Tracker</span>
-  <span class="spacer"></span>
-  <app-theme-toggle></app-theme-toggle>
-</mat-toolbar>
 
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav class="app-sidenav" #sidenav mode="side" opened style="width: 250px;" fixedInViewport="true">
-    <app-navigation></app-navigation>
-  </mat-sidenav>
+@if (!isLoginRoute) {
+<ng-container>
+  <mat-toolbar class="app-toolbar">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="app-title">Bill Tracker</span>
+    <span class="spacer"></span>
+    <app-theme-toggle></app-theme-toggle>
+  </mat-toolbar>
 
-  <mat-sidenav-content class="main-content">
-    <div class="content-wrapper">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav class="app-sidenav" #sidenav mode="side" opened style="width: 250px;" fixedInViewport="true">
+      <app-navigation></app-navigation>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="main-content">
+      <div class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>
+
+} @else {
+<router-outlet></router-outlet>
+
+}

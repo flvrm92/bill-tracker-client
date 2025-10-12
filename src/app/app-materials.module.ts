@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -35,6 +36,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
     MatCheckboxModule,
     MatDialogModule,
     MatInputModule,
+    MatFormFieldModule,
     MatMenuModule,
     MatPaginatorModule,
     MatSlideToggleModule,
@@ -50,6 +52,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
     MatTooltipModule,
     MatIconModule,
     MatProgressBarModule,
+    MatCardModule,
     MatSidenavModule,
     MatListModule,
     MatGridListModule,
@@ -61,6 +64,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
     MatCheckboxModule,
     MatDialogModule,
     MatInputModule,
+    MatFormFieldModule,
     MatMenuModule,
     MatPaginatorModule,
     MatSlideToggleModule,
