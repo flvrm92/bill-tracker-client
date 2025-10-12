@@ -13,6 +13,7 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 import { AppMaterialsModule } from './app-materials.module';
 import { CoreModule } from './core/core.module';
 import { ProgressBarInterceptor } from './core/services/progress-bar.interceptor';
+import { AuthInterceptor } from './core/services/auth.interceptor';
 
 // Import new components
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
@@ -40,6 +41,11 @@ import { NavigationComponent } from './core/components/navigation/navigation.com
             {
                 provide: HTTP_INTERCEPTORS,
                 useClass: ProgressBarInterceptor,
+                multi: true
+            },
+            {
+                provide: HTTP_INTERCEPTORS,
+                useClass: AuthInterceptor,
                 multi: true
             },
             provideHttpClient(withInterceptorsFromDi())
