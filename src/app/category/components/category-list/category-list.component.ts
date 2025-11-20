@@ -69,6 +69,12 @@ export class CategoryListComponent implements OnInit {
     }
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
   private updateDataSource(): void {
     this.dataSource.data = this.categories;
   }

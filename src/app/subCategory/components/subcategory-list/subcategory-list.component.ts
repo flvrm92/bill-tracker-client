@@ -72,4 +72,11 @@ export class SubCategoryListComponent {
   private updateDataSource(): void {
     this.dataSource.data = this.subcategories;
   }
+
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
 }
