@@ -4,6 +4,11 @@
 @use 'tailwindcss/utilities';
 @use './themes/material-theme.scss';
 
+.mat-mdc-form-field .mdc-notched-outline__notch {
+  border-right: 0;
+  border-left: 0;
+}
+
 html,
 body {
   height: 100%;

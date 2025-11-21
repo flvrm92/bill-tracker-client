@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ApplicationService } from 'src/app/core/services/application.service';
 import { AuthStateService } from '../../../shared/services/auth-state.service';
@@ -14,6 +15,7 @@ import { AuthStateService } from '../../../shared/services/auth-state.service';
 export class LoginComponent {
   hidePassword = true;
   error: string | null = null;
+  isSubmitting = false;
 
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -36,10 +38,17 @@ export class LoginComponent {
       return;
     }
 
+    if (this.isSubmitting) {
+      return;
+    }
+
+    this.isSubmitting = true;
     const email = (this.form.value.email ?? '').toString().trim();
     const password = this.form.value.password ?? '';
 
-    this.authService.login({ email, password }).subscribe({
+    this.authService.login({ email, password }).pipe(finalize(() => {
+      this.isSubmitting = false;
+    })).subscribe({
       next: (resp) => {
         if (!resp || !resp.token || !resp.expiresAtUtc) {
           this.error = 'Invalid response from server.';
@@ -54,6 +63,10 @@ export class LoginComponent {
         this.error = 'Invalid email or password';
       }
     });
+  }
+
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
   }
 
   private safeRedirect(url: string | null): string | null {
