@@ -1,5 +1,10 @@
 <div class="flex flex-col">
   <div class="overflow-auto">
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
     <table class="table" mat-table [dataSource]="dataSource">
 
       <ng-container matColumnDef="name">

@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -52,6 +53,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
     MatTooltipModule,
     MatIconModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatCardModule,
     MatSidenavModule,
     MatListModule,
@@ -80,6 +82,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
     MatTooltipModule,
     MatIconModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatCardModule,
     MatSidenavModule,
     MatListModule,

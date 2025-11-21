@@ -17,6 +17,11 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, credentials)
       .pipe(catchError(logAndThrowHttpError<AuthResponse>('auth')));
   }
+
+  changePassword(changeRequest: { email: string; currentPassword: string; newPassword: string }): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/auth/change-password`, changeRequest)
+      .pipe(catchError(logAndThrowHttpError<void>('auth')));
+  }
 }
 
 export interface AuthResponse {
