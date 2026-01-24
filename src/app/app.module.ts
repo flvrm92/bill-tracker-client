@@ -18,10 +18,14 @@ import { AuthInterceptor } from './core/services/auth.interceptor';
 // Import new components
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 import { NavigationComponent } from './core/components/navigation/navigation.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        AuthLayoutComponent,
+        MainLayoutComponent
     ],
     bootstrap: [
         AppComponent,
