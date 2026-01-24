@@ -10,7 +10,7 @@ export const NAVIGATION_CONFIG: NavigationItem[] = [
   {
     label: 'Home',
     icon: 'home',
-    route: '/'
+    route: '/home'
   },
   {
     label: 'Financial',
@@ -38,5 +38,5 @@ export const NAVIGATION_CONFIG: NavigationItem[] = [
     label: 'Settings',
     icon: 'settings',
     route: '/settings'
-  }
+  },
 ];

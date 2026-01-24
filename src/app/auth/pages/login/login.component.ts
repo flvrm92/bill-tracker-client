@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ApplicationService } from 'src/app/core/services/application.service';
 import { AuthStateService } from '../../../shared/services/auth-state.service';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { AuthStateService } from '../../../shared/services/auth-state.service';
   styleUrls: ['./login.component.scss'],
   standalone: false
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   hidePassword = true;
   error: string | null = null;
   isSubmitting = false;
@@ -28,8 +29,13 @@ export class LoginComponent {
     private authState: AuthStateService,
     private app: ApplicationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private themeService: ThemeService
   ) { }
+
+  ngOnInit(): void {
+    this.themeService.setTheme(this.themeService.getCurrentTheme());
+  }
 
   submit() {
     this.error = null;
