@@ -1,15 +1,13 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, finalize } from "rxjs";
-import { ApplicationService } from "./application.service";
+import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { finalize } from 'rxjs';
+import { ApplicationService } from './application.service';
 
-@Injectable()
-export class ProgressBarInterceptor implements HttpInterceptor {
-  constructor(private applicationService: ApplicationService) { }
+export const progressBarInterceptor: HttpInterceptorFn = (req, next) => {
+  const applicationService = inject(ApplicationService);
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.applicationService.showProgressBar(true);
-    return next.handle(req).pipe(finalize(() => this.applicationService.showProgressBar(false)));
-  }
-
-}
+  applicationService.showProgressBar(true);
+  return next(req).pipe(
+    finalize(() => applicationService.showProgressBar(false))
+  );
+};

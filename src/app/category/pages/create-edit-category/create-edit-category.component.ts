@@ -1,5 +1,11 @@
 import { Component, SecurityContext, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ICategory, generateDefaultCategory } from 'src/app/core/models/ICategory';
 import { CategoryService } from '../../services/category.service';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
@@ -8,10 +14,19 @@ import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-    selector: 'app-create-edit-caetgory',
-    templateUrl: './create-edit-category.component.html',
-    styleUrls: ['./create-edit-category.component.scss'],
-    standalone: false
+  selector: 'app-create-edit-caetgory',
+  templateUrl: './create-edit-category.component.html',
+  styleUrls: ['./create-edit-category.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule
+  ]
 })
 export class CreateEditCategoryComponent implements OnInit, OnDestroy {
   category: ICategory | undefined;

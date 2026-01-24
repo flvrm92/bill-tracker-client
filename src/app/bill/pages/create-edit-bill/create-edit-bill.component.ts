@@ -1,8 +1,17 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { IBIllDto, IBill, IBillItem, ICategory, ISubCategory, generateDefaultBill, generateDefaultBillItem } from 'src/app/core/models';
 import { AddUpdateBillItemComponent } from '../add-update-bill-item/add-update-bill-item.component';
+import { BillItemListComponent } from '../../components/bill-item-list/bill-item-list.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillService } from '../../services/bill.service';
@@ -12,7 +21,19 @@ import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
   selector: 'app-create-edit-bill',
   templateUrl: './create-edit-bill.component.html',
   styleUrls: ['./create-edit-bill.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    BillItemListComponent
+  ]
 })
 export class CreateEditBillComponent implements OnInit {
   bill: IBill | undefined;

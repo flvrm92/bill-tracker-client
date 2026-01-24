@@ -1,5 +1,6 @@
-import { IEnvironment } from "./Ienvironment";
+import { AppEnvironment } from '../app/config/environment.token';
 
-export const Environment: IEnvironment = {
-  apiUrl: 'http://localhost:5047'
-}
+export const environment: AppEnvironment = {
+  apiUrl: 'http://localhost:5047',
+  production: false
+};

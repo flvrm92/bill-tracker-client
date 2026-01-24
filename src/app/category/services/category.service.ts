@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Environment } from '../../../environments/environment';
+import { inject, Injectable } from "@angular/core";
+import { ENVIRONMENT } from 'src/app/config/environment.token';
 import { Observable, ReplaySubject, catchError, retry, share, timer } from "rxjs";
 import { ICategory } from "src/app/core/models/ICategory";
 import { logAndHandleHttpError, logAndThrowHttpError } from "src/app/shared/http-utilities";
@@ -11,7 +11,8 @@ const CACHE_TIMEOUT_MS = 60000;
   providedIn: 'root'
 })
 export class CategoryService {
-  private readonly apiUrl = Environment.apiUrl;
+  private readonly env = inject(ENVIRONMENT);
+  private readonly apiUrl = this.env.apiUrl;
 
   constructor(private http: HttpClient) { }
 
