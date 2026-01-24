@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { catchError, Observable } from "rxjs";
-import { Environment } from "src/environments/environment";
+import { ENVIRONMENT } from "src/app/config/environment.token";
 import { logAndThrowHttpError } from "../http-utilities";
 
 @Injectable({
@@ -9,7 +9,8 @@ import { logAndThrowHttpError } from "../http-utilities";
 })
 
 export class AuthService {
-  private readonly apiUrl = Environment.apiUrl;
+  private readonly env = inject(ENVIRONMENT);
+  private readonly apiUrl = this.env.apiUrl;
 
   constructor(private http: HttpClient) { }
 

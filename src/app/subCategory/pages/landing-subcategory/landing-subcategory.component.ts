@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ISubCategoryDto } from 'src/app/core/models/ISubCategory';
 import { SubCategoryService } from '../../services/sub-category.service';
+import { SubCategoryListComponent } from '../../components/subcategory-list/subcategory-list.component';
 
 @Component({
-    selector: 'app-landing-subcategory',
-    templateUrl: './landing-subcategory.component.html',
-    styleUrls: ['./landing-subcategory.component.scss'],
-    standalone: false
+  selector: 'app-landing-subcategory',
+  templateUrl: './landing-subcategory.component.html',
+  styleUrls: ['./landing-subcategory.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink, SubCategoryListComponent]
 })
 export class LandingSubCategoryComponent {
 

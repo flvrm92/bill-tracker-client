@@ -1,5 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/category/services/category.service';
 import { ISubCategory, generateDefaultSubCategory } from 'src/app/core/models/ISubCategory';
@@ -12,7 +20,18 @@ import { ICategory } from 'src/app/core/models/ICategory';
   selector: 'app-create-edit-subcategory',
   templateUrl: './create-edit-subcategory.component.html',
   styleUrls: ['./create-edit-subcategory.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatIconModule
+  ]
 })
 export class CreateEditSubCategoryComponent implements OnDestroy, OnInit {
   subCategory: ISubCategory | undefined;

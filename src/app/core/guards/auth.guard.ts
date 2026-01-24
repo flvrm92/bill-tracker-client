@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router, UrlTree } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router, UrlTree } from '@angular/router';
 import { AuthStateService } from 'src/app/shared/services/auth-state.service';
 
-@Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
-  constructor(private authState: AuthStateService, private router: Router) { }
+export const authGuard: CanActivateFn = (): boolean | UrlTree => {
+  const authState = inject(AuthStateService);
+  const router = inject(Router);
 
-  canActivate(): boolean | UrlTree {
-    if (this.authState.isTokenValid()) {
-      return true;
-    }
-    const redirectUrl = this.router.url && !this.router.url.startsWith('/login') ? this.router.url : '/home';
-    return this.router.createUrlTree(['/login'], { queryParams: { redirectUrl } });
+  if (authState.isTokenValid()) {
+    return true;
   }
-}
+
+  const redirectUrl = router.url && !router.url.startsWith('/login') ? router.url : '/home';
+  return router.createUrlTree(['/login'], { queryParams: { redirectUrl } });
+};

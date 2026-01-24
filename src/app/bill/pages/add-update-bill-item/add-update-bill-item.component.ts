@@ -1,10 +1,17 @@
 import { Component, DestroyRef, Inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { BillItemForm, CreateEditBillComponent } from '../create-edit-bill/create-edit-bill.component';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { IBillItem, ICategory, ISubCategory, generateDefaultBillItem } from 'src/app/core/models';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CategoryService } from 'src/app/category/services/category.service';
-import { SubCategoryService } from 'src/app/subCategory/services/sub-category.service';
+import { SubCategoryService } from 'src/app/subcategory/services/sub-category.service';
 import { forkJoin, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -12,7 +19,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'app-add-update-bill-item',
   templateUrl: './add-update-bill-item.component.html',
   styleUrl: './add-update-bill-item.component.scss',
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule
+  ]
 })
 export class AddUpdateBillItemComponent implements OnInit {
 

@@ -1,39 +1,38 @@
-import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { AuthStateService } from 'src/app/shared/services/auth-state.service';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Environment } from 'src/environments/environment';
+import { throwError } from 'rxjs';
+import { AuthStateService } from 'src/app/shared/services/auth-state.service';
+import { ENVIRONMENT } from 'src/app/config/environment.token';
 
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authState: AuthStateService, private router: Router) { }
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const authState = inject(AuthStateService);
+  const router = inject(Router);
+  const env = inject(ENVIRONMENT);
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const isAuthEndpoint = req.url.startsWith(`${Environment.apiUrl}/auth/`);
-    const isAsset = req.url.startsWith('assets/') || req.url.startsWith('/assets/');
+  const isAuthEndpoint = req.url.startsWith(`${env.apiUrl}/auth/`);
+  const isAsset = req.url.startsWith('assets/') || req.url.startsWith('/assets/');
 
-    if (!isAuthEndpoint && !isAsset) {
-      if (!this.authState.isTokenValid()) {
-        const currentUrl = this.router.url;
-        const redirectUrl = currentUrl && !currentUrl.startsWith('/login') ? currentUrl : '/home';
-        // Avoid infinite loops when already on login
-        if (!this.router.url.startsWith('/login')) {
-          this.router.navigate(['/login'], { queryParams: { redirectUrl } });
-        }
-        return throwError(() => new Error('Authentication required'));
+  if (!isAuthEndpoint && !isAsset) {
+    if (!authState.isTokenValid()) {
+      const currentUrl = router.url;
+      const redirectUrl = currentUrl && !currentUrl.startsWith('/login') ? currentUrl : '/home';
+      // Avoid infinite loops when already on login
+      if (!router.url.startsWith('/login')) {
+        router.navigate(['/login'], { queryParams: { redirectUrl } });
       }
-
-      const token = this.authState.getToken();
-      if (token) {
-        req = req.clone({
-          setHeaders: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-      }
+      return throwError(() => new Error('Authentication required'));
     }
 
-    return next.handle(req);
+    const token = authState.getToken();
+    if (token) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+    }
   }
-}
+
+  return next(req);
+};

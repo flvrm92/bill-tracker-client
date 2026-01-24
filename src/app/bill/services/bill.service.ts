@@ -1,15 +1,16 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Observable, catchError, map, retry } from "rxjs";
 import { IBIllDto, IBill } from "src/app/core/models";
 import { logAndHandleHttpError, logAndThrowHttpError } from "src/app/shared/http-utilities";
-import { Environment } from "src/environments/environment";
+import { ENVIRONMENT } from "src/app/config/environment.token";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BillService {
-  private readonly apiUrl = Environment.apiUrl;
+  private readonly env = inject(ENVIRONMENT);
+  private readonly apiUrl = this.env.apiUrl;
 
   constructor(private http: HttpClient) { }
 

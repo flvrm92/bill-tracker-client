@@ -1,17 +1,29 @@
-import { Component, DestroyRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { IBIllDto, ISubCategory } from 'src/app/core/models';
+import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { IBIllDto } from 'src/app/core/models';
 import { BillService } from '../../services/bill.service';
 import { Router } from '@angular/router';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
-import { MatPaginator } from '@angular/material/paginator';
 import { PAGINATOR_DEFAULT_PAGE_SIZE, PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS } from 'src/app/config';
 
 @Component({
   selector: 'app-bill-list',
   templateUrl: './bill-list.component.html',
   styleUrls: ['./bill-list.component.scss'],
-  standalone: false
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
+  ]
 })
 export class BillListComponent implements OnInit {
   @Input() bills: IBIllDto[] = [];

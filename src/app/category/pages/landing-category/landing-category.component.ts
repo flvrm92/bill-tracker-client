@@ -1,13 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ICategory } from 'src/app/core/models/ICategory';
+import { CategoryListComponent } from '../../components/category-list/category-list.component';
 
 @Component({
-    selector: 'app-landing-category',
-    templateUrl: './landing-category.component.html',
-    styleUrls: ['./landing-category.component.scss'],
-    standalone: false
+  selector: 'app-landing-category',
+  templateUrl: './landing-category.component.html',
+  styleUrls: ['./landing-category.component.scss'],
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink, CategoryListComponent]
 })
 export class LandingCategoryComponent implements OnInit, OnDestroy {
 
@@ -20,8 +26,8 @@ export class LandingCategoryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.categoryService.getAll()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe(categories => this.categories = categories);
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(categories => this.categories = categories);
   }
 
   ngOnDestroy(): void {
