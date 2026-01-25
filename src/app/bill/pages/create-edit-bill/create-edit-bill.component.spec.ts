@@ -11,7 +11,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { provideHttpClient } from '@angular/common/http';
 import { ENVIRONMENT } from 'src/app/config/environment.token';
 import { CategoryService } from 'src/app/category/services/category.service';
-import { SubCategoryService } from 'src/app/subCategory/services/sub-category.service';
+import { SubCategoryService } from 'src/app/subcategory/services/sub-category.service';
 
 describe('CreateEditBillComponent', () => {
   let component: CreateEditBillComponent;

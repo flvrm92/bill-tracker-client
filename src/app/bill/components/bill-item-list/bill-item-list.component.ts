@@ -17,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { IBillItem, ICategory, ISubCategory } from 'src/app/core/models';
-import { SubCategoryService } from 'src/app/subCategory/services/sub-category.service';
+import { SubCategoryService } from 'src/app/subcategory/services/sub-category.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AddUpdateBillItemComponent } from '../../pages/add-update-bill-item/add-update-bill-item.component';
 import { forkJoin } from 'rxjs';

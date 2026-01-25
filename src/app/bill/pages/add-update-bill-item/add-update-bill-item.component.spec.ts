@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddUpdateBillItemComponent } from './add-update-bill-item.component';
 import { CategoryService } from 'src/app/category/services/category.service';
-import { SubCategoryService } from 'src/app/subCategory/services/sub-category.service';
+import { SubCategoryService } from 'src/app/subcategory/services/sub-category.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { IBillItem, ICategory } from 'src/app/core/models';
