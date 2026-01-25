@@ -17,7 +17,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-create-edit-caetgory',
   templateUrl: './create-edit-category.component.html',
   styleUrls: ['./create-edit-category.component.scss'],
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -8,7 +8,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'app-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrl: './progress-bar.component.scss',
-  standalone: true,
   imports: [CommonModule, MatProgressBarModule]
 })
 export class ProgressBarComponent {

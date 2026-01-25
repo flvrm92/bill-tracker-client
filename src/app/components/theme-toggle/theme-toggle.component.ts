@@ -9,7 +9,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-theme-toggle',
-  standalone: true,
   imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
   templateUrl: './theme-toggle.component.html',
   styleUrls: ['./theme-toggle.component.scss']

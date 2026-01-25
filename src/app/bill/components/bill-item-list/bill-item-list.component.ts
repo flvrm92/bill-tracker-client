@@ -28,7 +28,6 @@ import { PAGINATOR_DEFAULT_PAGE_SIZE, PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS } from
   selector: 'app-bill-item-list',
   templateUrl: './bill-item-list.component.html',
   styleUrls: ['./bill-item-list.component.scss'],
-  standalone: true,
   imports: [
     CommonModule,
     MatTableModule,

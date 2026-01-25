@@ -17,7 +17,6 @@ import { STRONG_PASSWORD_HINT, passwordMatchValidator, strongPasswordValidator }
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

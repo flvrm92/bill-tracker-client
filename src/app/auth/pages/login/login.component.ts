@@ -18,7 +18,6 @@ import { ThemeService } from 'src/app/core/services/theme.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

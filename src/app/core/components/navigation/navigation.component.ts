@@ -10,7 +10,6 @@ import { AuthStateService } from 'src/app/shared/services/auth-state.service';
 
 @Component({
   selector: 'app-navigation',
-  standalone: true,
   imports: [CommonModule, RouterModule, MatListModule, MatIconModule],
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']

@@ -21,7 +21,6 @@ import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
   selector: 'app-create-edit-bill',
   templateUrl: './create-edit-bill.component.html',
   styleUrls: ['./create-edit-bill.component.scss'],
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

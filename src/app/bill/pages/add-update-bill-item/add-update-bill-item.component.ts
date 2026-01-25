@@ -19,7 +19,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'app-add-update-bill-item',
   templateUrl: './add-update-bill-item.component.html',
   styleUrl: './add-update-bill-item.component.scss',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -12,7 +12,6 @@ import { SubCategoryListComponent } from '../../components/subcategory-list/subc
   selector: 'app-landing-subcategory',
   templateUrl: './landing-subcategory.component.html',
   styleUrls: ['./landing-subcategory.component.scss'],
-  standalone: true,
   imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink, SubCategoryListComponent]
 })
 export class LandingSubCategoryComponent {

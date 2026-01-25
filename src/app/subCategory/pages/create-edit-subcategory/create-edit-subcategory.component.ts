@@ -20,7 +20,6 @@ import { ICategory } from 'src/app/core/models/ICategory';
   selector: 'app-create-edit-subcategory',
   templateUrl: './create-edit-subcategory.component.html',
   styleUrls: ['./create-edit-subcategory.component.scss'],
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
