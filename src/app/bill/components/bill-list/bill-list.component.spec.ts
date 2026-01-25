@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { ENVIRONMENT } from 'src/app/config/environment.token';
 import { BillListComponent } from './bill-list.component';
 
 describe('BillListComponent', () => {
@@ -8,7 +10,12 @@ describe('BillListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BillListComponent]
+      imports: [BillListComponent],
+      providers: [
+        provideHttpClient(),
+        provideRouter([]),
+        { provide: ENVIRONMENT, useValue: { apiUrl: 'http://localhost:5047', production: false } }
+      ]
     });
     fixture = TestBed.createComponent(BillListComponent);
     component = fixture.componentInstance;

@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { ENVIRONMENT } from 'src/app/config/environment.token';
 import { LandingCategoryComponent } from './landing-category.component';
 
 describe('LandingCategoryComponent', () => {
@@ -8,9 +10,14 @@ describe('LandingCategoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LandingCategoryComponent ]
+      imports: [LandingCategoryComponent],
+      providers: [
+        provideHttpClient(),
+        provideRouter([]),
+        { provide: ENVIRONMENT, useValue: { apiUrl: 'http://localhost:5047', production: false } }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(LandingCategoryComponent);
     component = fixture.componentInstance;

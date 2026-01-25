@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { BillItemForm, CreateEditBillComponent } from '../create-edit-bill/create-edit-bill.component';
 import { IBillItem, ICategory, ISubCategory, generateDefaultBillItem } from 'src/app/core/models';
 import { CategoryService } from 'src/app/category/services/category.service';
-import { SubCategoryService } from 'src/app/subcategory/services/sub-category.service';
+import { SubCategoryService } from 'src/app/subCategory/services/sub-category.service';
 import { forkJoin, Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

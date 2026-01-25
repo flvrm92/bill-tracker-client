@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { ENVIRONMENT } from 'src/app/config/environment.token';
 import { CreateEditCategoryComponent } from './create-edit-category.component';
 
 describe('CreateEditCategoryComponent', () => {
@@ -8,9 +10,14 @@ describe('CreateEditCategoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateEditCategoryComponent ]
+      imports: [CreateEditCategoryComponent],
+      providers: [
+        provideHttpClient(),
+        provideRouter([]),
+        { provide: ENVIRONMENT, useValue: { apiUrl: 'http://localhost:5047', production: false } }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CreateEditCategoryComponent);
     component = fixture.componentInstance;
