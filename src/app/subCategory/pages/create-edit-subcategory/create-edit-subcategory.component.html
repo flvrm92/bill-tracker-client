@@ -18,8 +18,9 @@
               <mat-label>Category</mat-label>
 
               <mat-select formControlName="categoryId" placeholder="Select">
-                <mat-option *ngFor="let category of categories$ | async" [value]="category.id">{{ category.name
-                  }}</mat-option>
+                @for (category of categories$ | async; track category.id) {
+                  <mat-option [value]="category.id">{{ category.name }}</mat-option>
+                }
               </mat-select>
             </mat-form-field>
 

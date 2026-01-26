@@ -2,57 +2,60 @@
   <h1 class="dashboard-title">Bill Tracker Dashboard</h1>
 
   <!-- Loading State -->
-  <div *ngIf="isLoading" class="loading-state">
+  @if (isLoading) {
+  <div class="loading-state">
     <p>Loading dashboard data...</p>
   </div>
+  }
 
   <!-- Error State -->
-  <div *ngIf="error" class="error-state">
+  @if (error) {
+  <div class="error-state">
     <p>{{ error }}</p>
   </div>
+  }
 
   <!-- Charts Grid -->
-  <div *ngIf="!isLoading && !error" class="charts-grid">
+  @if (!isLoading && !error) {
+  <div class="charts-grid">
     <!-- Current Month Pie Chart -->
     <div class="chart-card">
       <h2 class="chart-title">Current Month Bills</h2>
-      <div *ngIf="currentMonthChartOptions; else noCurrentMonthData">
-        <apx-chart [series]="currentMonthChartOptions.series!" [chart]="currentMonthChartOptions.chart!"
-          [labels]="currentMonthChartOptions.labels!" [responsive]="currentMonthChartOptions.responsive!"
-          [legend]="currentMonthChartOptions.legend!">
-        </apx-chart>
-      </div>
-      <ng-template #noCurrentMonthData>
-        <p class="no-data">No data available for current month</p>
-      </ng-template>
+      @if (currentMonthChartOptions) {
+      <apx-chart [series]="currentMonthChartOptions.series!" [chart]="currentMonthChartOptions.chart!"
+        [labels]="currentMonthChartOptions.labels!" [responsive]="currentMonthChartOptions.responsive!"
+        [legend]="currentMonthChartOptions.legend!">
+      </apx-chart>
+      } @else {
+      <p class="no-data">No data available for current month</p>
+      }
     </div>
 
     <!-- Last Month Pie Chart -->
     <div class="chart-card">
       <h2 class="chart-title">Last Month Bills</h2>
-      <div *ngIf="lastMonthChartOptions; else noLastMonthData">
-        <apx-chart [series]="lastMonthChartOptions.series!" [chart]="lastMonthChartOptions.chart!"
-          [labels]="lastMonthChartOptions.labels!" [responsive]="lastMonthChartOptions.responsive!"
-          [legend]="lastMonthChartOptions.legend!">
-        </apx-chart>
-      </div>
-      <ng-template #noLastMonthData>
-        <p class="no-data">No data available for last month</p>
-      </ng-template>
+      @if (lastMonthChartOptions) {
+      <apx-chart [series]="lastMonthChartOptions.series!" [chart]="lastMonthChartOptions.chart!"
+        [labels]="lastMonthChartOptions.labels!" [responsive]="lastMonthChartOptions.responsive!"
+        [legend]="lastMonthChartOptions.legend!">
+      </apx-chart>
+      } @else {
+      <p class="no-data">No data available for last month</p>
+      }
     </div>
 
     <!-- Yearly Comparison Line Chart -->
     <div class="chart-card chart-card-wide">
       <h2 class="chart-title">Yearly Spending Comparison</h2>
-      <div *ngIf="yearlyComparisonChartOptions; else noYearlyData">
-        <apx-chart [series]="yearlyComparisonChartOptions.series!" [chart]="yearlyComparisonChartOptions.chart!"
-          [xaxis]="yearlyComparisonChartOptions.xaxis!" [dataLabels]="yearlyComparisonChartOptions.dataLabels!"
-          [stroke]="yearlyComparisonChartOptions.stroke!" [legend]="yearlyComparisonChartOptions.legend!">
-        </apx-chart>
-      </div>
-      <ng-template #noYearlyData>
-        <p class="no-data">No data available for yearly comparison</p>
-      </ng-template>
+      @if (yearlyComparisonChartOptions) {
+      <apx-chart [series]="yearlyComparisonChartOptions.series!" [chart]="yearlyComparisonChartOptions.chart!"
+        [xaxis]="yearlyComparisonChartOptions.xaxis!" [dataLabels]="yearlyComparisonChartOptions.dataLabels!"
+        [stroke]="yearlyComparisonChartOptions.stroke!" [legend]="yearlyComparisonChartOptions.legend!">
+      </apx-chart>
+      } @else {
+      <p class="no-data">No data available for yearly comparison</p>
+      }
     </div>
   </div>
+  }
 </div>

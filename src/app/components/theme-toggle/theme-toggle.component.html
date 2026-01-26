@@ -6,11 +6,15 @@
   <button mat-menu-item (click)="setTheme('light')" [class.active]="currentTheme === 'light'">
     <mat-icon>light_mode</mat-icon>
     <span>Light Theme</span>
-    <mat-icon *ngIf="currentTheme === 'light'" class="check-icon">check</mat-icon>
+    @if (currentTheme === 'light') {
+    <mat-icon class="check-icon">check</mat-icon>
+    }
   </button>
   <button mat-menu-item (click)="setTheme('dark')" [class.active]="currentTheme === 'dark'">
     <mat-icon>dark_mode</mat-icon>
     <span>Dark Theme</span>
-    <mat-icon *ngIf="currentTheme === 'dark'" class="check-icon">check</mat-icon>
+    @if (currentTheme === 'dark') {
+    <mat-icon class="check-icon">check</mat-icon>
+    }
   </button>
 </mat-menu>
