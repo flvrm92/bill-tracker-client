@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
 		const currentYear = now.getFullYear();
 
 		const currentMonthData = this.dashboardData.find(
-			d => d.paymentMonth.getMonth() === currentMonth && d.paymentMonth.getFullYear() === currentYear
+			d => d.paymentMonth.getMonth() + 1 === currentMonth && d.paymentMonth.getFullYear() === currentYear
 		);
 
 		if (!currentMonthData || currentMonthData.billItems.length === 0) {
@@ -146,7 +146,7 @@ export class HomeComponent implements OnInit {
 
 	private prepareLastMonthChart(): void {
 		const now = new Date();
-		const lastMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+		const lastMonth = new Date(now.getFullYear(), (now.getMonth() - 1), 1);
 		const lastMonthNumber = lastMonth.getMonth();
 		const lastMonthYear = lastMonth.getFullYear();
 
