@@ -1,5 +1,5 @@
 import { Component, SecurityContext, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,14 +18,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './create-edit-category.component.html',
   styleUrls: ['./create-edit-category.component.scss'],
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule
-  ]
+]
 })
 export class CreateEditCategoryComponent implements OnInit, OnDestroy {
   category: ICategory | undefined;

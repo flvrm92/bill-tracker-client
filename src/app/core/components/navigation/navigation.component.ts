@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,7 +10,7 @@ import { AuthStateService } from 'src/app/shared/services/auth-state.service';
 
 @Component({
   selector: 'app-navigation',
-  imports: [CommonModule, RouterModule, MatListModule, MatIconModule],
+  imports: [RouterModule, MatListModule, MatIconModule],
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })

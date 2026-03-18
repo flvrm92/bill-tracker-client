@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,14 +17,13 @@ import { PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS, PAGINATOR_DEFAULT_PAGE_SIZE } from
   templateUrl: './subcategory-list.component.html',
   styleUrls: ['./subcategory-list.component.scss'],
   imports: [
-    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule
-  ]
+]
 })
 export class SubCategoryListComponent {
 
