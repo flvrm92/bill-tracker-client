@@ -17,9 +17,6 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": {
-              "base": "dist/bill-tracker-client"
-            },
             "index": "src/index.html",
             "polyfills": [
               "zone.js"
@@ -42,7 +39,6 @@
               "optimization": true,
               "extractLicenses": true,
               "sourceMap": false,
-              "namedChunks": false,
               "budgets": [
                 {
                   "type": "initial",
@@ -67,7 +63,12 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
