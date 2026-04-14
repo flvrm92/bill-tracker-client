@@ -23,7 +23,7 @@ import { PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS, PAGINATOR_DEFAULT_PAGE_SIZE } from
     MatIconModule,
     MatFormFieldModule,
     MatInputModule
-]
+  ]
 })
 export class SubCategoryListComponent {
 
