@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,9 +19,9 @@ import { ICategory } from 'src/app/core/models/ICategory';
 @Component({
   selector: 'app-create-edit-subcategory',
   templateUrl: './create-edit-subcategory.component.html',
-  styleUrls: ['./create-edit-subcategory.component.scss'],
+  styleUrl: './create-edit-subcategory.component.scss',
   imports: [
-    CommonModule,
+    AsyncPipe,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,

@@ -16,7 +16,7 @@ import { STRONG_PASSWORD_HINT, passwordMatchValidator, strongPasswordValidator }
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss'],
+  styleUrl: './change-password.component.scss',
   imports: [
     ReactiveFormsModule,
     MatCardModule,
@@ -25,7 +25,7 @@ import { STRONG_PASSWORD_HINT, passwordMatchValidator, strongPasswordValidator }
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule
-]
+  ]
 })
 export class ChangePasswordComponent {
   hideCurrent = true;

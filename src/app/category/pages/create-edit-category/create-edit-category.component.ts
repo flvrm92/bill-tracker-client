@@ -16,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-create-edit-caetgory',
   templateUrl: './create-edit-category.component.html',
-  styleUrls: ['./create-edit-category.component.scss'],
+  styleUrl: './create-edit-category.component.scss',
   imports: [
     ReactiveFormsModule,
     MatCardModule,
@@ -24,7 +24,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     MatIconModule
-]
+  ]
 })
 export class CreateEditCategoryComponent implements OnInit, OnDestroy {
   category: ICategory | undefined;

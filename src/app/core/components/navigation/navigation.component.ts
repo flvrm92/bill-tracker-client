@@ -12,7 +12,7 @@ import { AuthStateService } from 'src/app/shared/services/auth-state.service';
   selector: 'app-navigation',
   imports: [RouterModule, MatListModule, MatIconModule],
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent implements OnInit {
   navigationItems = NAVIGATION_CONFIG;

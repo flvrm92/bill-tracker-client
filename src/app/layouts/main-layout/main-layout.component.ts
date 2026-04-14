@@ -11,7 +11,7 @@ import { ProgressBarComponent } from '../../core/components/progress-bar/progres
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
-  styleUrls: ['./main-layout.component.scss'],
+  styleUrl: './main-layout.component.scss',
   imports: [
     RouterOutlet,
     MatToolbarModule,

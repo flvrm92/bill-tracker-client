@@ -1,4 +1,4 @@
-import { Component, DestroyRef, Inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { BillItemForm, CreateEditBillComponent } from '../create-edit-bill/create-edit-bill.component';
+import { BillItemForm, buildBillItemForm } from '../../bill-form.utils';
 import { IBillItem, ICategory, ISubCategory, generateDefaultBillItem } from 'src/app/core/models';
 import { CategoryService } from 'src/app/category/services/category.service';
 import { SubCategoryService } from 'src/app/subcategory/services/sub-category.service';
@@ -28,7 +28,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatButtonModule,
     MatCardModule,
     MatIconModule
-]
+  ]
 })
 export class AddUpdateBillItemComponent implements OnInit {
 
@@ -43,20 +43,21 @@ export class AddUpdateBillItemComponent implements OnInit {
   isUpdate: boolean = false;
   billItemInputData: IBillItem;
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) data: IBillItem,
-    private fb: FormBuilder,
-    private dialogRef: MatDialogRef<AddUpdateBillItemComponent, IBillItem>,
-    private categoryService: CategoryService,
-    private subCategoryService: SubCategoryService,
-    private destroyRef: DestroyRef) {
+  private readonly data = inject<IBillItem>(MAT_DIALOG_DATA);
+  private readonly fb = inject(FormBuilder);
+  private readonly dialogRef = inject<MatDialogRef<AddUpdateBillItemComponent, IBillItem>>(MatDialogRef);
+  private readonly categoryService = inject(CategoryService);
+  private readonly subCategoryService = inject(SubCategoryService);
+  private readonly destroyRef = inject(DestroyRef);
 
+  constructor() {
+    const data = this.data;
     if (data) {
       this.isUpdate = true;
       this.billItemInputData = data;
     }
 
-    this.form = CreateEditBillComponent.buildBillItemForm(this.fb, generateDefaultBillItem());
+    this.form = buildBillItemForm(this.fb, generateDefaultBillItem());
 
     this.form.controls.categoryId.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -106,6 +107,6 @@ export class AddUpdateBillItemComponent implements OnInit {
       value: this.billItemInputData.value,
     } as IBillItem;
 
-    this.form = CreateEditBillComponent.buildBillItemForm(this.fb, billItem);
+    this.form = buildBillItemForm(this.fb, billItem);
   }
 }

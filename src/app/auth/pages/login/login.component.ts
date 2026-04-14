@@ -17,7 +17,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrl: './login.component.scss',
   imports: [
     ReactiveFormsModule,
     RouterLink,
@@ -27,7 +27,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule
-]
+  ]
 })
 export class LoginComponent implements OnInit {
   hidePassword = true;

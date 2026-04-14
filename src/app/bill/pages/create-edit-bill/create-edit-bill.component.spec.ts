@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CreateEditBillComponent } from './create-edit-bill.component';
+import { buildBillItemForm } from '../../bill-form.utils';
 import { BillService } from '../../services/bill.service';
 import { AlertService } from 'src/app/shared/services/alert.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -141,8 +142,8 @@ describe('CreateEditBillComponent', () => {
     const item2: IBillItem = { id: '2', description: 'Item 2', value: 200 } as IBillItem;
 
     component.billItems = [item1, item2];
-    component.form.controls.billItems.push(CreateEditBillComponent.buildBillItemForm(component['fb'], item1));
-    component.form.controls.billItems.push(CreateEditBillComponent.buildBillItemForm(component['fb'], item2));
+    component.form.controls.billItems.push(buildBillItemForm(component['fb'], item1));
+    component.form.controls.billItems.push(buildBillItemForm(component['fb'], item2));
 
     component.onBillItemDelete(item1);
 
@@ -155,7 +156,7 @@ describe('CreateEditBillComponent', () => {
       { id: '1', description: 'Item 1', value: 100 } as IBillItem
     ];
     component.form.controls.billItems.push(
-      CreateEditBillComponent.buildBillItemForm(component['fb'], component.billItems[0])
+      buildBillItemForm(component['fb'], component.billItems[0])
     );
 
     const updatedItem: IBillItem = { id: '1', description: 'Item 1', value: 300 } as IBillItem;

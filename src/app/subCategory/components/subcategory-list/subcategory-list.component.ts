@@ -15,7 +15,7 @@ import { PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS, PAGINATOR_DEFAULT_PAGE_SIZE } from
 @Component({
   selector: 'app-subcategory-list',
   templateUrl: './subcategory-list.component.html',
-  styleUrls: ['./subcategory-list.component.scss'],
+  styleUrl: './subcategory-list.component.scss',
   imports: [
     MatTableModule,
     MatPaginatorModule,

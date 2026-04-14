@@ -1,4 +1,4 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import { AuthResponse } from './auth.service';
@@ -15,8 +15,8 @@ export class AuthStateService {
   readonly token$ = this.tokenSubject.asObservable();
   readonly expiresAt$ = this.expiresAtSubject.asObservable();
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
-    this.isBrowser = isPlatformBrowser(platformId);
+  constructor() {
+    this.isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
     if (this.isBrowser) {
       this.restoreSession();
     }

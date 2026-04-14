@@ -11,7 +11,7 @@ import { CategoryListComponent } from '../../components/category-list/category-l
 @Component({
   selector: 'app-landing-category',
   templateUrl: './landing-category.component.html',
-  styleUrls: ['./landing-category.component.scss'],
+  styleUrl: './landing-category.component.scss',
   imports: [MatButtonModule, MatIconModule, RouterLink, CategoryListComponent]
 })
 export class LandingCategoryComponent implements OnInit, OnDestroy {

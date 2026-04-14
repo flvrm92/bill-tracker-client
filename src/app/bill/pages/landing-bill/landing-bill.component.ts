@@ -11,7 +11,7 @@ import { BillListComponent } from '../../components/bill-list/bill-list.componen
 @Component({
   selector: 'app-landing-bill',
   templateUrl: './landing-bill.component.html',
-  styleUrls: ['./landing-bill.component.scss'],
+  styleUrl: './landing-bill.component.scss',
   imports: [MatButtonModule, MatIconModule, RouterLink, BillListComponent]
 })
 export class LandingBillComponent implements OnInit {

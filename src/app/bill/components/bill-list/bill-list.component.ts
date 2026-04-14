@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,9 +14,10 @@ import { PAGINATOR_DEFAULT_PAGE_SIZE, PAGINATOR_DEFAULT_PAGE_SIZE_OPTIONS } from
 @Component({
   selector: 'app-bill-list',
   templateUrl: './bill-list.component.html',
-  styleUrls: ['./bill-list.component.scss'],
+  styleUrl: './bill-list.component.scss',
   imports: [
-    CommonModule,
+    DatePipe,
+    CurrencyPipe,
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,

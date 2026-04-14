@@ -11,7 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'app-theme-toggle',
   imports: [MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
   templateUrl: './theme-toggle.component.html',
-  styleUrls: ['./theme-toggle.component.scss']
+  styleUrl: './theme-toggle.component.scss'
 })
 export class ThemeToggleComponent implements OnInit {
   currentTheme = 'light';

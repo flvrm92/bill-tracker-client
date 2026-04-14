@@ -5,7 +5,7 @@ import { ProgressBarComponent } from '../../core/components/progress-bar/progres
 @Component({
   selector: 'app-auth-layout',
   templateUrl: './auth-layout.component.html',
-  styleUrls: ['./auth-layout.component.scss'],
+  styleUrl: './auth-layout.component.scss',
   imports: [RouterOutlet, ProgressBarComponent]
 })
 export class AuthLayoutComponent { }

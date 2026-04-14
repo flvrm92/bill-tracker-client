@@ -1,6 +1,6 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 
-import { ReactiveFormsModule, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -9,18 +9,19 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { IBIllDto, IBill, IBillItem, ICategory, ISubCategory, generateDefaultBill, generateDefaultBillItem } from 'src/app/core/models';
+import { IBIllDto, IBill, IBillItem, generateDefaultBill } from 'src/app/core/models';
 import { AddUpdateBillItemComponent } from '../add-update-bill-item/add-update-bill-item.component';
 import { BillItemListComponent } from '../../components/bill-item-list/bill-item-list.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillService } from '../../services/bill.service';
 import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
+import { BillForm, BillItemForm, buildBillItemForm } from '../../bill-form.utils';
 
 @Component({
   selector: 'app-create-edit-bill',
   templateUrl: './create-edit-bill.component.html',
-  styleUrls: ['./create-edit-bill.component.scss'],
+  styleUrl: './create-edit-bill.component.scss',
   imports: [
     ReactiveFormsModule,
     MatCardModule,
@@ -31,7 +32,7 @@ import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
     MatNativeDateModule,
     MatIconModule,
     BillItemListComponent
-]
+  ]
 })
 export class CreateEditBillComponent implements OnInit {
   bill: IBill | undefined;
@@ -107,7 +108,7 @@ export class CreateEditBillComponent implements OnInit {
 
     ref.afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
       if (result) {
-        this.form.controls.billItems.push(CreateEditBillComponent.buildBillItemForm(this.fb, result));
+        this.form.controls.billItems.push(buildBillItemForm(this.fb, result));
         this.billItems = [...this.billItems, result];
         this.afterFormChanges();
       }
@@ -140,20 +141,7 @@ export class CreateEditBillComponent implements OnInit {
       total: '0',
       totalIncoming: bill?.totalIncoming,
       billItems: fb.array<FormGroup<BillItemForm>>(
-        bill?.billItems?.map(bi => CreateEditBillComponent.buildBillItemForm(fb, bi))) ?? [generateDefaultBillItem()]
-    })
-  }
-
-  static buildBillItemForm(fb: FormBuilder, billItem: IBillItem): FormGroup<BillItemForm> {
-    return fb.nonNullable.group({
-      id: billItem.id,
-      billId: billItem.billId,
-      description: billItem.description,
-      categoryId: billItem.categoryId,
-      category: billItem.category,
-      subCategoryId: billItem.subCategoryId,
-      subCategory: billItem.subCategory,
-      value: billItem.value,
+        bill?.billItems?.map(bi => buildBillItemForm(fb, bi)) ?? [])
     })
   }
 
@@ -194,21 +182,4 @@ export class CreateEditBillComponent implements OnInit {
 
 }
 
-export interface BillForm {
-  id: FormControl<string | undefined>,
-  payment: FormControl<Date>,
-  total: FormControl<string>,
-  totalIncoming: FormControl<number>,
-  billItems: FormArray<FormGroup<BillItemForm>>,
-}
-
-export interface BillItemForm {
-  id: FormControl<string | undefined>,
-  billId: FormControl<string | undefined>,
-  description: FormControl<string>,
-  categoryId: FormControl<string>,
-  category: FormControl<ICategory | undefined>,
-  subCategoryId: FormControl<string>,
-  subCategory: FormControl<ISubCategory | undefined>,
-  value: FormControl<number | undefined>,
-}
+export { BillForm, BillItemForm } from '../../bill-form.utils';
