@@ -1,5 +1,5 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
@@ -12,7 +12,7 @@ import { BillListComponent } from '../../components/bill-list/bill-list.componen
   selector: 'app-landing-bill',
   templateUrl: './landing-bill.component.html',
   styleUrls: ['./landing-bill.component.scss'],
-  imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink, BillListComponent]
+  imports: [MatButtonModule, MatIconModule, RouterLink, BillListComponent]
 })
 export class LandingBillComponent implements OnInit {
 

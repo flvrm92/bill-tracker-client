@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,7 +19,6 @@ import { ThemeService } from 'src/app/core/services/theme.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     RouterLink,
     MatCardModule,
@@ -28,7 +27,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule
-  ]
+]
 })
 export class LoginComponent implements OnInit {
   hidePassword = true;

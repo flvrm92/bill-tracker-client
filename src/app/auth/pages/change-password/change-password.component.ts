@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,7 +18,6 @@ import { STRONG_PASSWORD_HINT, passwordMatchValidator, strongPasswordValidator }
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
@@ -26,7 +25,7 @@ import { STRONG_PASSWORD_HINT, passwordMatchValidator, strongPasswordValidator }
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule
-  ]
+]
 })
 export class ChangePasswordComponent {
   hideCurrent = true;

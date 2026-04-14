@@ -1,5 +1,5 @@
 import { Component, DestroyRef, Inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,7 +20,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './add-update-bill-item.component.html',
   styleUrl: './add-update-bill-item.component.scss',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -29,7 +28,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatButtonModule,
     MatCardModule,
     MatIconModule
-  ]
+]
 })
 export class AddUpdateBillItemComponent implements OnInit {
 

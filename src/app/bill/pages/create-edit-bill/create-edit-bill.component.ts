@@ -1,5 +1,5 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,7 +22,6 @@ import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
   templateUrl: './create-edit-bill.component.html',
   styleUrls: ['./create-edit-bill.component.scss'],
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
@@ -32,7 +31,7 @@ import { AlertIcon, AlertService } from 'src/app/shared/services/alert.service';
     MatNativeDateModule,
     MatIconModule,
     BillItemListComponent
-  ]
+]
 })
 export class CreateEditBillComponent implements OnInit {
   bill: IBill | undefined;

@@ -1,5 +1,5 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ApexChart, ApexNonAxisChartSeries, ApexResponsive, ApexAxisChartSeries, ApexXAxis, ApexYAxis, ApexDataLabels, ApexStroke, ApexLegend, ApexTheme, ApexTooltip } from 'ng-apexcharts';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -32,7 +32,7 @@ export type LineChartOptions = {
 @Component({
 	selector: 'app-home',
 	standalone: true,
-	imports: [CommonModule, NgApexchartsModule],
+	imports: [NgApexchartsModule],
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.scss']
 })

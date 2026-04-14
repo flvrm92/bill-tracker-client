@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, DestroyRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ApplicationService } from '../../services/application.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -8,7 +8,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: 'app-progress-bar',
   templateUrl: './progress-bar.component.html',
   styleUrl: './progress-bar.component.scss',
-  imports: [CommonModule, MatProgressBarModule]
+  imports: [MatProgressBarModule]
 })
 export class ProgressBarComponent {
   loading: boolean = false;

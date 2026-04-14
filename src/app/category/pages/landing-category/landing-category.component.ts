@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
@@ -12,7 +12,7 @@ import { CategoryListComponent } from '../../components/category-list/category-l
   selector: 'app-landing-category',
   templateUrl: './landing-category.component.html',
   styleUrls: ['./landing-category.component.scss'],
-  imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink, CategoryListComponent]
+  imports: [MatButtonModule, MatIconModule, RouterLink, CategoryListComponent]
 })
 export class LandingCategoryComponent implements OnInit, OnDestroy {
 
